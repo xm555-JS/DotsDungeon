@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class cSetting_Slot : MonoBehaviour
 {
     public Button otherSlot;
     public Sprite emptySprite;
     public GameObject coolTime;
+    public cSkillData[] skillData;
 
     Button skillSlot;
 
@@ -21,7 +23,6 @@ public class cSetting_Slot : MonoBehaviour
     void Awake()
     {
         skillSlot = this.GetComponent<Button>();
-        //coolTime.GetComponent<cSkillTime>().CoolTimeSetting(0);
     }
 
     public void OnSkillClick()
@@ -98,13 +99,29 @@ public class cSetting_Slot : MonoBehaviour
 
         /* ***추가적인 스킬이 생기면 이 곳에 코드를 추가해 주세요*** */
         if (image.sprite.name == "Fire_Shoot")
+        {
+            float returnCoolTime = SetCoolTime(image);
             btn.onClick.AddListener(GameManager.instance.player.Fire_Shoot);
+            btn.onClick.AddListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(image)); // returnCoolTime
+        }
         else if (image.sprite.name == "Ice_Shoot")
+        {
+            float returnCoolTime = SetCoolTime(image);
             btn.onClick.AddListener(GameManager.instance.player.Ice_Shoot);
-        else if (image.sprite.name == "Heal")
-            btn.onClick.AddListener(GameManager.instance.player.Heal);
-        else if (image.sprite.name == "Poision_Shoot")
-            btn.onClick.AddListener(GameManager.instance.player.Poision_Shoot);
+            btn.onClick.AddListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(image));
+        }
+        //else if (image.sprite.name == "Heal")
+        //{
+        //    float returnCoolTime = SetCoolTime(image);
+        //    btn.onClick.AddListener(GameManager.instance.player.Heal);
+        //    btn.onClick.AddListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
+        //}
+        //else if (image.sprite.name == "Poision_Shoot")
+        //{
+        //    float returnCoolTime = SetCoolTime(image);
+        //    btn.onClick.AddListener(GameManager.instance.player.Poision_Shoot);
+        //    btn.onClick.AddListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
+        //}
     }
 
     void Remove_Skill()
@@ -125,13 +142,47 @@ public class cSetting_Slot : MonoBehaviour
 
         /* ***추가적인 스킬이 생기면 이 곳에 코드를 추가해 주세요*** */
         if (image.sprite.name == "Fire_Shoot")
+        {
+            float returnCoolTime = SetCoolTime(image);
             btn.onClick.RemoveListener(GameManager.instance.player.Fire_Shoot);
+            btn.onClick.RemoveListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(image)); //returnCoolTime
+        }
         else if (image.sprite.name == "Ice_Shoot")
+        {
+            float returnCoolTime = SetCoolTime(image);
             btn.onClick.RemoveListener(GameManager.instance.player.Ice_Shoot);
-        else if (image.sprite.name == "Heal")
-            btn.onClick.RemoveListener(GameManager.instance.player.Heal);
-        else if (image.sprite.name == "Poision_Shoot")
-            btn.onClick.RemoveListener(GameManager.instance.player.Poision_Shoot);
+            btn.onClick.RemoveListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(image));
+        }
+        //else if (image.sprite.name == "Heal")
+        //{
+        //    float returnCoolTime = SetCoolTime(image);
+        //    btn.onClick.RemoveListener(GameManager.instance.player.Heal);
+        //    btn.onClick.RemoveListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
+        //}
+        //else if (image.sprite.name == "Poision_Shoot")
+        //{
+        //    float returnCoolTime = SetCoolTime(image);
+        //    btn.onClick.RemoveListener(GameManager.instance.player.Poision_Shoot);
+        //    btn.onClick.RemoveListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
+        //}
+    }
+
+    float SetCoolTime(Image skillImage)
+    {
+        float coolTime = 0f;
+        bool isFound = false;
+        foreach (cSkillData skill in skillData)
+        {
+            if (skillImage.sprite == skill.skillSprite)
+            {
+                coolTime = skill.skillCoolTime;
+                isFound = true;
+            }
+        }
+
+        if (!isFound)
+            Debug.Log("스킬 쿨타임 설정 오류!");
+
+        return coolTime;
     }
 }
-

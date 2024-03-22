@@ -5,48 +5,42 @@ using UnityEngine.UI;
 
 public class cSkillTime : MonoBehaviour
 {
-    public GameObject[] skills;
-    public Image[] skillImages;
-
-    //bool[] isCoolTimes = {false, false };
-    float[] coolTime = { 3f, 7f };
+    Color color;
 
     void Awake()
     {
-        // 초반 스킬 쿨타임표시 이미지는 비활성화
-        for (int i = 0; i < skills.Length; i++)
-        {
-            skillImages[i].gameObject.SetActive(false);
-        }
+        color = this.gameObject.GetComponent<Image>().color;
     }
 
-    public void CoolTimeSetting(Image skill)
+    public void CoolTimeSetting(Image image) // float coolTime
     {
-        /* ***추가적인 스킬이 생기면 이 곳에 코드를 추가해 주세요*** */
-
-        //if (skill.sprite.name == "Fire_Shoot")
-
-        //if (!isCoolTimes[skillNum])
-        //{
-        //    skillImages[skillNum].gameObject.SetActive(true);
-        //    isCoolTimes[skillNum] = true;
-        //    StartCoroutine(StartCoolTime(skillNum));
-        //}
+        Debug.Log(image.sprite + "스킬 쿨타임 적용됨");
+        //SetAlphaColor(0.8f);
+        //StartCoroutine(StartCoolTime(coolTime));
     }
 
-    IEnumerator StartCoolTime(int skillNum)
+    IEnumerator StartCoolTime(float coolTime)
     {
+        this.gameObject.GetComponent<Image>().raycastTarget = true;
+
         float elapsedTime = 0f;
-        while (elapsedTime < coolTime[skillNum])
+        while (elapsedTime < coolTime)
         {
             elapsedTime += Time.deltaTime;
 
-            float fillAmount = 1f - (elapsedTime / coolTime[skillNum]);
-            skillImages[skillNum].fillAmount = fillAmount;
+            float fillAmount = 1f - (elapsedTime / coolTime);
+            this.gameObject.GetComponent<Image>().fillAmount = fillAmount;
             yield return null;
         }
-        //isCoolTimes[skillNum] = false;
-        skillImages[skillNum].fillAmount = 1f;
-        skillImages[skillNum].gameObject.SetActive(false);
+
+        SetAlphaColor(0f);
+        this.gameObject.GetComponent<Image>().fillAmount = 1f;
+        this.gameObject.GetComponent<Image>().raycastTarget = false;
+    }
+
+    void SetAlphaColor(float alpha)
+    {
+        color.a = alpha;
+        this.gameObject.GetComponent<Image>().color = color;
     }
 }

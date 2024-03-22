@@ -1609,6 +1609,11 @@ MonoBehaviour:
   otherSlot: {fileID: 2067266512}
   emptySprite: {fileID: 21300000, guid: daf35c185153446e5bc72062e31930db, type: 3}
   coolTime: {fileID: 1402811023}
+  skillData:
+  - {fileID: 11400000, guid: 88cc1cc9fe2030740bbf698b4d6be18e, type: 2}
+  - {fileID: 11400000, guid: 5cb780a6229d35d4cb239d0c7d43a0ca, type: 2}
+  - {fileID: 11400000, guid: 2a660bcc3dc8ec14b9c0dac99c04f502, type: 2}
+  - {fileID: 11400000, guid: a1966eda9be456f4eb4e21c7a227b4b9, type: 2}
 --- !u!61 &294835568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3561,7 +3566,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 926383148}
-  - component: {fileID: 926383149}
   m_Layer: 5
   m_Name: Skill
   m_TagString: Untagged
@@ -3592,24 +3596,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
---- !u!114 &926383149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926383147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d64864657cc6f478645736a1f4ba3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skills:
-  - {fileID: 813731252}
-  - {fileID: 0}
-  skillImages:
-  - {fileID: 1402811025}
-  - {fileID: 1202569357}
 --- !u!1 &950097906
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,13 +3840,14 @@ GameObject:
   - component: {fileID: 1202569356}
   - component: {fileID: 1202569358}
   - component: {fileID: 1202569357}
+  - component: {fileID: 1202569359}
   m_Layer: 5
   m_Name: CoolTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1202569356
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3894,14 +3881,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0.78431374}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 57326f057acaf42b6822f395114561f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: daf35c185153446e5bc72062e31930db, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3919,6 +3906,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202569355}
   m_CullTransparentMesh: 1
+--- !u!114 &1202569359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202569355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d64864657cc6f478645736a1f4ba3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1247000233
 GameObject:
   m_ObjectHideFlags: 0
@@ -4931,13 +4930,14 @@ GameObject:
   - component: {fileID: 1402811024}
   - component: {fileID: 1402811026}
   - component: {fileID: 1402811025}
+  - component: {fileID: 1402811027}
   m_Layer: 5
   m_Name: CoolTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1402811024
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4971,8 +4971,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0.78431374}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4996,6 +4996,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402811023}
   m_CullTransparentMesh: 1
+--- !u!114 &1402811027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402811023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d64864657cc6f478645736a1f4ba3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1413006967
 GameObject:
   m_ObjectHideFlags: 0
@@ -10827,6 +10839,11 @@ MonoBehaviour:
   otherSlot: {fileID: 294835564}
   emptySprite: {fileID: 21300000, guid: daf35c185153446e5bc72062e31930db, type: 3}
   coolTime: {fileID: 1202569355}
+  skillData:
+  - {fileID: 11400000, guid: 88cc1cc9fe2030740bbf698b4d6be18e, type: 2}
+  - {fileID: 11400000, guid: 5cb780a6229d35d4cb239d0c7d43a0ca, type: 2}
+  - {fileID: 11400000, guid: 2a660bcc3dc8ec14b9c0dac99c04f502, type: 2}
+  - {fileID: 11400000, guid: a1966eda9be456f4eb4e21c7a227b4b9, type: 2}
 --- !u!61 &2067266516
 BoxCollider2D:
   m_ObjectHideFlags: 0
