@@ -14,7 +14,6 @@ public class cSkillData : ScriptableObject
     public string skillDesc;
     public Sprite skillSprite;
     public float skillCoolTime;
-
     //해당 스킬의 이름, 스프라이트, 쿨타임 스프라이트, 쿨타임 시간, 설명, 속성 등
 
 }

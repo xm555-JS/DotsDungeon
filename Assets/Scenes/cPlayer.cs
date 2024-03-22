@@ -16,6 +16,8 @@ public class cPlayer : MonoBehaviour
 
     Sprite skillSprite;
 
+    bool isSkillSetting;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -63,18 +65,45 @@ public class cPlayer : MonoBehaviour
     }
 
     public cSkillData returnData() { return skillData; }
+    public void SetisSkillSetting(bool _isSkillSetting) { isSkillSetting = _isSkillSetting; }
+    public bool GetisSkillSetting() { return isSkillSetting; }
 
     public void Attack()
     {
+        if (isSkillSetting)
+            return;
+
         Debug.Log("기본 스킬 사용");
     }
-    public void Fire_Skill()
+    public void Fire_Shoot()
     {
+        if (isSkillSetting)
+            return;
+
         Debug.Log("불 스킬 사용!");
+    }
+
+    public void Ice_Shoot()
+    {
+        if (isSkillSetting)
+            return;
+
+        Debug.Log("얼음 스킬 사용!");
+    }
+
+    public void Poision_Shoot()
+    {
+        if (isSkillSetting)
+            return;
+
+        Debug.Log("독 스킬 사용!");
     }
 
     public void Heal()
     {
+        if (isSkillSetting)
+            return;
+
         Debug.Log("힐 스킬 사용!");
     }
 }
