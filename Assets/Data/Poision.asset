@@ -16,4 +16,4 @@ MonoBehaviour:
   skillName: Poision_Shoot
   skillDesc: "\uC804\uBC29\uC5D0 \uB3C5\uC744 \uB0A0\uB9B0\uB2E4."
   skillSprite: {fileID: 21300000, guid: 53d17b5a59b9740d3b5fcee17dc50514, type: 3}
-  skillCoolTime: 0
+  skillCoolTime: 5

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class cSkillTime : MonoBehaviour
 {
+    public bool isPlaying;
     Color color;
 
     void Awake()
@@ -12,11 +13,16 @@ public class cSkillTime : MonoBehaviour
         color = this.gameObject.GetComponent<Image>().color;
     }
 
-    public void CoolTimeSetting(Image image) // float coolTime
+    public void CoolTimeSetting(float coolTime) // float coolTime
     {
-        Debug.Log(image.sprite + "½ºÅ³ ÄðÅ¸ÀÓ Àû¿ëµÊ");
-        //SetAlphaColor(0.8f);
-        //StartCoroutine(StartCoolTime(coolTime));
+        GameObject selected_Imaget = GameObject.Find("Selected_Skill(Clone)");
+        if (selected_Imaget)
+            return;
+
+        Debug.Log(coolTime + "½ºÅ³ ÄðÅ¸ÀÓ Àû¿ëµÊ");
+        isPlaying = true;
+        SetAlphaColor(0.8f);
+        StartCoroutine(StartCoolTime(coolTime));
     }
 
     IEnumerator StartCoolTime(float coolTime)
@@ -36,6 +42,7 @@ public class cSkillTime : MonoBehaviour
         SetAlphaColor(0f);
         this.gameObject.GetComponent<Image>().fillAmount = 1f;
         this.gameObject.GetComponent<Image>().raycastTarget = false;
+        isPlaying = false;
     }
 
     void SetAlphaColor(float alpha)

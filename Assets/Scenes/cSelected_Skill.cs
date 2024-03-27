@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class cSelected_Skill : MonoBehaviour
 {
-    BoxCollider2D boxColider;
-
-    void Awake()
-    {
-        boxColider = GetComponent<BoxCollider2D>();
-    }
     void Update()
     {
         // 마우스 -> 스크린좌표

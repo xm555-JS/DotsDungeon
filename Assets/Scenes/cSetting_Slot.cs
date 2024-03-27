@@ -34,6 +34,9 @@ public class cSetting_Slot : MonoBehaviour
         if (selected_Skill == null)
             return;
 
+        if (SlotCheck())
+            return;
+
         selected_Image = selected_Skill.GetComponent<Image>();
         slot_Image = this.GetComponent<Image>();
 
@@ -101,27 +104,35 @@ public class cSetting_Slot : MonoBehaviour
         if (image.sprite.name == "Fire_Shoot")
         {
             float returnCoolTime = SetCoolTime(image);
+            GameObject btnCoolTIme = btn.GetComponent<cSetting_Slot>().coolTime;
+
             btn.onClick.AddListener(GameManager.instance.player.Fire_Shoot);
-            btn.onClick.AddListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(image)); // returnCoolTime
+            btn.onClick.AddListener(() => btnCoolTIme.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
         }
         else if (image.sprite.name == "Ice_Shoot")
         {
             float returnCoolTime = SetCoolTime(image);
+            GameObject btnCoolTIme = btn.GetComponent<cSetting_Slot>().coolTime;
+
             btn.onClick.AddListener(GameManager.instance.player.Ice_Shoot);
-            btn.onClick.AddListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(image));
+            btn.onClick.AddListener(() => btnCoolTIme.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
         }
-        //else if (image.sprite.name == "Heal")
-        //{
-        //    float returnCoolTime = SetCoolTime(image);
-        //    btn.onClick.AddListener(GameManager.instance.player.Heal);
-        //    btn.onClick.AddListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
-        //}
-        //else if (image.sprite.name == "Poision_Shoot")
-        //{
-        //    float returnCoolTime = SetCoolTime(image);
-        //    btn.onClick.AddListener(GameManager.instance.player.Poision_Shoot);
-        //    btn.onClick.AddListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
-        //}
+        else if (image.sprite.name == "Heal")
+        {
+            float returnCoolTime = SetCoolTime(image);
+            GameObject btnCoolTIme = btn.GetComponent<cSetting_Slot>().coolTime;
+
+            btn.onClick.AddListener(GameManager.instance.player.Heal);
+            btn.onClick.AddListener(() => btnCoolTIme.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
+        }
+        else if (image.sprite.name == "Poision_Shoot")
+        {
+            float returnCoolTime = SetCoolTime(image);
+            GameObject btnCoolTIme = btn.GetComponent<cSetting_Slot>().coolTime;
+
+            btn.onClick.AddListener(GameManager.instance.player.Poision_Shoot);
+            btn.onClick.AddListener(() => btnCoolTIme.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
+        }
     }
 
     void Remove_Skill()
@@ -140,31 +151,14 @@ public class cSetting_Slot : MonoBehaviour
             image = slot_Image;
         }
 
-        /* ***추가적인 스킬이 생기면 이 곳에 코드를 추가해 주세요*** */
-        if (image.sprite.name == "Fire_Shoot")
-        {
-            float returnCoolTime = SetCoolTime(image);
-            btn.onClick.RemoveListener(GameManager.instance.player.Fire_Shoot);
-            btn.onClick.RemoveListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(image)); //returnCoolTime
-        }
-        else if (image.sprite.name == "Ice_Shoot")
-        {
-            float returnCoolTime = SetCoolTime(image);
-            btn.onClick.RemoveListener(GameManager.instance.player.Ice_Shoot);
-            btn.onClick.RemoveListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(image));
-        }
+        //if (image.sprite.name == "Fire_Shoot")
+        btn.onClick.RemoveAllListeners();
+        //else if (image.sprite.name == "Ice_Shoot")
+        //    btn.onClick.RemoveAllListeners();
         //else if (image.sprite.name == "Heal")
-        //{
-        //    float returnCoolTime = SetCoolTime(image);
-        //    btn.onClick.RemoveListener(GameManager.instance.player.Heal);
-        //    btn.onClick.RemoveListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
-        //}
+        //    btn.onClick.RemoveAllListeners();
         //else if (image.sprite.name == "Poision_Shoot")
-        //{
-        //    float returnCoolTime = SetCoolTime(image);
-        //    btn.onClick.RemoveListener(GameManager.instance.player.Poision_Shoot);
-        //    btn.onClick.RemoveListener(() => coolTime.GetComponent<cSkillTime>().CoolTimeSetting(returnCoolTime));
-        //}
+        //    btn.onClick.RemoveAllListeners();
     }
 
     float SetCoolTime(Image skillImage)
@@ -184,5 +178,18 @@ public class cSetting_Slot : MonoBehaviour
             Debug.Log("스킬 쿨타임 설정 오류!");
 
         return coolTime;
+    }
+
+    bool SlotCheck()
+    {
+        Image image = otherSlot.GetComponent<Image>();
+        Image Select_Image = GameObject.Find("Selected_Skill(Clone)").GetComponent<Image>();
+        GameObject obj = otherSlot.GetComponent<cSetting_Slot>().coolTime;
+
+        bool chk = false;
+        if (image.sprite == Select_Image.sprite)
+            chk = obj.GetComponent<cSkillTime>().isPlaying;
+
+        return chk;
     }
 }
