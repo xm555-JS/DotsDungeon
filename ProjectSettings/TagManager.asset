@@ -9,15 +9,17 @@ TagManager:
   - Wall
   - Skill_Item
   - Selected_Skill
+  - Skill
+  - Monster
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Effect
   - Water
   - UI
+  - Player
   - Tile
-  - 
   - 
   - 
   - 

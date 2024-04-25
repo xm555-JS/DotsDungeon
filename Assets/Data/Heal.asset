@@ -12,8 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa7b8d3e8709cd46b3b973e28f947d2, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  skillType: 4
+  skillType: Normal
   skillName: Heal
   skillDesc: "HP\uB97C \uD68C\uBCF5\uD55C\uB2E4."
   skillSprite: {fileID: 21300000, guid: 57326f057acaf42b6822f395114561f6, type: 3}
   skillCoolTime: 7
+  skillDamage:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10

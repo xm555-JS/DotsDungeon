@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 public class cPlayer : MonoBehaviour
 {
     cSkillData skillData;
+    cSkill Effect;
+
+    public GameObject skill;
 
     public Vector2 inputVec;
     public float speed;
@@ -17,6 +20,14 @@ public class cPlayer : MonoBehaviour
     Sprite skillSprite;
 
     bool isSkillSetting;
+    bool isAttack;
+
+    float defaultAttackSpeed = 1f;
+    bool isDefaultAttack;
+
+    public cSkillData returnData() { return skillData; }
+    public void SetisSkillSetting(bool _isSkillSetting) { isSkillSetting = _isSkillSetting; }
+    public bool GetisSkillSetting() { return isSkillSetting; }
 
     void Awake()
     {
@@ -25,13 +36,21 @@ public class cPlayer : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    void Start()
+    {
+        Effect = skill.GetComponent<cSkill>();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (isAttack == true)
+            return;
+
         anim.SetFloat("isRun", inputVec.magnitude);
 
         if (inputVec.x != 0f)
-        { 
+        {
             if (inputVec.x > 0)
                 transform.localScale = new Vector3(-1, 1, 1);
             else
@@ -41,7 +60,7 @@ public class cPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (inputVec == null)
+        if (inputVec == null || isAttack == true)
             return;
 
         Vector2 moveVec = inputVec * speed * Time.deltaTime;
@@ -57,30 +76,36 @@ public class cPlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Skill_Item"))
         {
-            // 스킬창에 충돌된 스킬이 들어가야함.
             skillData = collision.gameObject.GetComponent<cItem>().skillData;
-
             collision.gameObject.SetActive(false);
         }
     }
 
-    public cSkillData returnData() { return skillData; }
-    public void SetisSkillSetting(bool _isSkillSetting) { isSkillSetting = _isSkillSetting; }
-    public bool GetisSkillSetting() { return isSkillSetting; }
-
     public void Attack()
     {
-        if (isSkillSetting)
+        if (isDefaultAttack)
             return;
 
-        Debug.Log("기본 스킬 사용");
+        isAttack = true;
+        isDefaultAttack = true;
+        anim.SetTrigger("isAttack");
+
+        StartCoroutine("DefaultAttack");
     }
+
+    IEnumerator DefaultAttack()
+    {
+        yield return new WaitForSeconds(defaultAttackSpeed);
+
+        isDefaultAttack = false;
+    }
+
     public void Fire_Shoot()
     {
         if (isSkillSetting)
             return;
 
-        Debug.Log("불 스킬 사용!");
+        Active_Skill("Fire_Shoot");
     }
 
     public void Ice_Shoot()
@@ -88,7 +113,8 @@ public class cPlayer : MonoBehaviour
         if (isSkillSetting)
             return;
 
-        Debug.Log("얼음 스킬 사용!");
+        Active_Skill("Ice_Shoot");
+
     }
 
     public void Poision_Shoot()
@@ -96,7 +122,7 @@ public class cPlayer : MonoBehaviour
         if (isSkillSetting)
             return;
 
-        Debug.Log("독 스킬 사용!");
+        Active_Skill("Poision_Shoot");
     }
 
     public void Heal()
@@ -104,6 +130,33 @@ public class cPlayer : MonoBehaviour
         if (isSkillSetting)
             return;
 
-        Debug.Log("힐 스킬 사용!");
+        Passive_Skill("Heal");
+    }
+
+    public void OnAttackAnimEnd()
+    {
+        isAttack = false;
+
+        anim.SetTrigger("isAttack");
+    }
+
+    void Active_Skill(string _skillName)
+    {
+        isAttack = true;
+        Effect.SkillInstantiate(_skillName);
+        anim.SetTrigger("isAttack");
+    }
+
+    void Passive_Skill(string _skillName)
+    {
+        isAttack = true;
+        Effect.SkillInstantiate(_skillName);
+        StartCoroutine("animTrriger");
+    }
+
+    IEnumerator animTrriger()
+    {
+        yield return null;
+        isAttack = false;
     }
 }

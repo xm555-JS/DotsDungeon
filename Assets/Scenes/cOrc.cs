@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class cOrc : cMonster
 {
-    //void MontsterAwake()
-    //{
-    //    Debug.Log("(전)자식도 실행 잘 됨?");
-    //    base.Awake();
-    //    Debug.Log("(후)자식도 실행 잘 됨?");
-    //}
-
-    //// Update is called once per frame
-    //void MonsterUpdate()
-    //{
-    //    base.Update();
-    //}
+    void Start()
+    {
+        speed = 2f;
+        hp = 100f;
+        maxHp = 100f;
+        distance = 0.5f;
+    }
 }

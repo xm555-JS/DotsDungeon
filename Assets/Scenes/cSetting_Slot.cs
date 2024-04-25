@@ -182,6 +182,7 @@ public class cSetting_Slot : MonoBehaviour
 
     bool SlotCheck()
     {
+        // 쿨타임일 때 스킬을 바꾸지 못하게 check
         Image image = otherSlot.GetComponent<Image>();
         Image Select_Image = GameObject.Find("Selected_Skill(Clone)").GetComponent<Image>();
         GameObject obj = otherSlot.GetComponent<cSetting_Slot>().coolTime;
