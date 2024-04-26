@@ -9,6 +9,10 @@ namespace Chapter.State
         private BossController _bossController;
         private Animator anim;
 
+        private float defaultDamage;
+
+        public float GetDamege() { return defaultDamage; }
+
         public void Handle(BossController bossController)
         {
             if (!_bossController)
@@ -22,6 +26,7 @@ namespace Chapter.State
         void Awake()
         {
             anim = GetComponent<Animator>();
+            defaultDamage = 20f;
         }
     }
 }

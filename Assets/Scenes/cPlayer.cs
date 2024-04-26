@@ -19,6 +19,9 @@ public class cPlayer : MonoBehaviour
 
     Sprite skillSprite;
 
+    float hp;
+    float maxHp;
+
     bool isSkillSetting;
     bool isAttack;
 
@@ -28,12 +31,16 @@ public class cPlayer : MonoBehaviour
     public cSkillData returnData() { return skillData; }
     public void SetisSkillSetting(bool _isSkillSetting) { isSkillSetting = _isSkillSetting; }
     public bool GetisSkillSetting() { return isSkillSetting; }
+    public void PlayerHpDown(float damege) { hp -= damege; }
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         capCollider = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
+
+        maxHp = 100f;
+        hp = maxHp;
     }
 
     void Start()
@@ -78,6 +85,12 @@ public class cPlayer : MonoBehaviour
         {
             skillData = collision.gameObject.GetComponent<cItem>().skillData;
             collision.gameObject.SetActive(false);
+        }
+
+        if (collision.gameObject.CompareTag("Skill"))
+        {
+            hp -= 20f + Random.Range(10, 20);
+            Debug.Log("플레이어 HP : " + hp);
         }
     }
 

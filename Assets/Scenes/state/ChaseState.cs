@@ -21,8 +21,8 @@ namespace Chapter.State
             if (!_bossController)
                 _bossController = bossController;
 
-            //if (speed <= 0f)
-            //    speed = 1f;
+            if (speed <= 0f)
+                speed = 1f;
 
             isChase = true;
         }

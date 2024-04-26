@@ -7,9 +7,11 @@ namespace Chapter.State
     public class MagicSkillState : MonoBehaviour, IBossState
     {
         private BossController _bossController;
-
         private Animator anim;
 
+        private float defaultDamage;
+
+        public float GetDamege() { return defaultDamage; }
 
         public void Handle(BossController bossController)
         {
@@ -24,6 +26,7 @@ namespace Chapter.State
         void Awake()
         {
             anim = GetComponent<Animator>();
+            defaultDamage = 25f;
         }
     }
 }
