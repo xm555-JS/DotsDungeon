@@ -4838,7 +4838,7 @@ GameObject:
   - component: {fileID: 7699516727334806029}
   - component: {fileID: 8292365405317074653}
   - component: {fileID: 7457176575522604457}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Boss_SwordSkill
   m_TagString: Skill
   m_Icon: {fileID: 0}

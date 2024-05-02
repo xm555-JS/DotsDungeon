@@ -35,13 +35,13 @@ namespace Chapter.State
 
                 if (time >= 1f)
                 {
-                    randomNum = Random.Range(1, 2);
+                    randomNum = Random.Range(1, 4);
                     if (randomNum == 1)
                         _bossController.SwordSkillState();
-                    //else if (randomNum == 2)
-                    //    _bossController.MagicSkillState();
-                    //else if (randomNum == 3)
-                    //    _bossController.NormalAttackState();
+                    else if (randomNum == 2)
+                        _bossController.MagicSkillState();
+                    else if (randomNum == 3)
+                        _bossController.NormalAttackState();
 
                     time = 0f;
                 }
@@ -58,8 +58,6 @@ namespace Chapter.State
             }
                 
         }
-
-        // 요기서 해당 애니메이션이 끝났을 때 다음 state로 넘어갈 수 있도록 해준다면?
     }
 }
 
