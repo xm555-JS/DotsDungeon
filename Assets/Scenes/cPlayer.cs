@@ -89,7 +89,8 @@ public class cPlayer : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Skill"))
         {
-            hp -= 20f + Random.Range(10, 20);
+            float damage = collision.gameObject.GetComponent<cSKillInfo>().damege;
+            hp -= damage;
             Debug.Log("플레이어 HP : " + hp);
         }
     }

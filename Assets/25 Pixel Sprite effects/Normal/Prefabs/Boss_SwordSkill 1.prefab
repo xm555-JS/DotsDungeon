@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8000125791578608273}
   - component: {fileID: -2091347069693907042}
   - component: {fileID: 5323946925829621108}
+  - component: {fileID: -6319823978359010797}
   m_Layer: 0
   m_Name: Boss_SwordSkill 1
   m_TagString: Skill
@@ -4874,6 +4875,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &-6319823978359010797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7186759860332104941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f342a320793e01643b7bca37802ba94e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damege: 20
 --- !u!1 &9218518825471778508
 GameObject:
   m_ObjectHideFlags: 0
@@ -4887,6 +4901,7 @@ GameObject:
   - component: {fileID: 8310383790285734064}
   - component: {fileID: 9213945730669752061}
   - component: {fileID: 8779745364847344512}
+  - component: {fileID: 168438730459544318}
   m_Layer: 7
   m_Name: Ef_18_normal_p
   m_TagString: Skill
@@ -9747,3 +9762,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &168438730459544318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9218518825471778508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f342a320793e01643b7bca37802ba94e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damege: 5
