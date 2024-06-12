@@ -11,6 +11,8 @@ TagManager:
   - Selected_Skill
   - Skill
   - Monster
+  - Monster_Attack
+  - Player_Normal
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - Water
   - UI
   - Player
+  - Monster
   - Tile
-  - 
   - 
   - 
   - 

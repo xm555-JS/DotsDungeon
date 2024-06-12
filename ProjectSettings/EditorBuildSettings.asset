@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DefaltMap.unity
+    path: Assets/Scenes/Map/Level_Start.unity
+    guid: 3e3e957957508b64da916829e87036ac
+  - enabled: 1
+    path: Assets/Scenes/Map/Level_Lobby.unity
+    guid: e11b5a11555acd84786ab8a9d1806dfe
+  - enabled: 1
+    path: Assets/Scenes/Map/Level_Stage1.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Map1.unity
+    path: Assets/Scenes/Map/Level_Boss.unity
     guid: 368fcc63399e87e46b43b2ba824d16ef
   m_configObjects: {}

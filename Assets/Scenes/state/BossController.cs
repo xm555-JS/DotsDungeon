@@ -16,7 +16,7 @@ namespace Chapter.State
         public GameObject magicSkill;
 
         private IBossState
-            _normalAttackState, _swordSkillState, _magicSkillState, _chaseState;
+            _normalAttackState, _swordSkillState, _magicSkillState, _chaseState, _deadState;
 
         private BossStateContext _bossStateContext;
 
@@ -35,6 +35,7 @@ namespace Chapter.State
             _swordSkillState = gameObject.AddComponent<SwordSkillState>();
             _magicSkillState = gameObject.AddComponent<MagicSkillState>();
             _chaseState = gameObject.AddComponent<ChaseState>();
+            _deadState = gameObject.AddComponent<DeadState>();
         }
 
         #region Boss_State
@@ -56,6 +57,11 @@ namespace Chapter.State
         public void ChaseState()
         {
             _bossStateContext.Transition(_chaseState);
+        }
+
+        public void DeadState()
+        {
+            _bossStateContext.Transition(_deadState);
         }
 
         public void SetState(IBossState state)
