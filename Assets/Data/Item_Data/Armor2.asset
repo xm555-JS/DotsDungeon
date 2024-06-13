@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e638f849a6714e746963365bd0aea49a, type: 3}
-  m_Name: Armor1
+  m_Name: Armor2
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: ddf0c84adeefe4c2aa0c204320188af8, type: 3}
   itmeType: Armor
-  itemName: "\uD53C\uB3FC\uC9C0 \uAC11\uC637"
-  itemDesc: "HP\uAC00 \uB300\uD3ED \uD5A5\uC0C1\uB41C\uB2E4."
+  itemName: "\uBC29\uC5B4\uB3FC\uC9C0 \uAC11\uC637"
+  itemDesc: "\uBC29\uC5B4\uB825\uC774 \uB300\uD3ED \uD5A5\uC0C1\uB41C\uB2E4."
   itemPrice: "\uAC00\uACA9 - 100000"
   price: 100000
   str: 0
   spell: 0
-  defen: 0
-  hp: 500
+  defen: 500
+  hp: 0
   coolTime: 0

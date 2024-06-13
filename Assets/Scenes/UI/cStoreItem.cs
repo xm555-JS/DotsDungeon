@@ -11,6 +11,7 @@ public class cStoreItem : MonoBehaviour
     private Text text;
     private Text priceText;
     private Text name;
+
     // Start is called before the first frame update
     void Start()
     { 

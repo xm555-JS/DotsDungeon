@@ -17,5 +17,9 @@ MonoBehaviour:
   itemName: "\uB2E8\uB2E8\uD55C \uD22C\uAD6C"
   itemDesc: "\uC0DD\uBA85\uB825\uACFC \uACF5\uACA9\uB825\uC744 \uC18C\uD3ED \uC99D\uAC00\uC2DC\uD0A8\uB2E4."
   itemPrice: "\uAC00\uACA9 - 10000"
-  ability: 10
   price: 10000
+  str: 20
+  spell: 0
+  defen: 0
+  hp: 50
+  coolTime: 0

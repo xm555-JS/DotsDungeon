@@ -11,6 +11,12 @@ public class cItemData : ScriptableObject
     public string itemName;
     public string itemDesc;
     public string itemPrice;
-    public float ability;
     public int price;
+
+    [Header("ItemStat")]
+    public float str;
+    public float spell;
+    public float defen;
+    public float hp;
+    public float coolTime;
 }

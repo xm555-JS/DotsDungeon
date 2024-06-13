@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public float spell;
     public float defen;
     public float hp;
+    public float coolTime;
 
     void Awake()
     {
@@ -32,8 +33,8 @@ public class GameManager : MonoBehaviour
         PlayerActiveOn();
         Maximum();
         // test_code
-        //if (Input.GetKeyDown(KeyCode.F))
-        //    money += 100;
+        if (Input.GetKeyDown(KeyCode.F))
+            money += 1000;
     }
 
     void PotalOpen()
