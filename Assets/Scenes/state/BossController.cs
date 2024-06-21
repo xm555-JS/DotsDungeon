@@ -92,7 +92,8 @@ namespace Chapter.State
             float posX = pos.x;
 
             GameObject obj = Instantiate(skill);
-            obj.transform.SetParent(this.transform);
+            if (obj.name != "magicSkill")
+                obj.transform.SetParent(this.transform);
 
             float scaleX = obj.transform.localScale.x;
             if (this.transform.localScale.x < 0f)
@@ -100,7 +101,7 @@ namespace Chapter.State
                 posX *= -1f;
                 scaleX *= -1f;
             }
-            
+
             obj.transform.position = this.transform.position + new Vector3(posX, pos.y, 0f);
             obj.transform.localScale = new Vector3(scaleX, 1f, 1f);
         }

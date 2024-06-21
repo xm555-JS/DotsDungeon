@@ -14,7 +14,6 @@ public class cPlayer : MonoBehaviour
     public Vector2 inputVec;
     public float speed;
 
-    public float attackPower;
     public float magicPower;
 
     Rigidbody2D rigid;
@@ -27,9 +26,12 @@ public class cPlayer : MonoBehaviour
 
     float hp;
     float maxHp;
+    float preMaxHp;
 
     bool isSkillSetting;
     bool isAttack;
+
+    bool isDead = false;
 
     float defaultAttackSpeed = 1f;
     bool isDefaultAttack;
@@ -49,7 +51,6 @@ public class cPlayer : MonoBehaviour
         anim = GetComponent<Animator>();
         maxHp = 100f;
         hp = maxHp;
-        attackPower = 10f;
         magicPower = 15f;
     }
 
@@ -63,7 +64,22 @@ public class cPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isAttack == true)
+        SetHp();
+
+        //test
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            hp -= 20f;
+            Debug.Log(hp);
+        }
+
+        if (hp <= 0)
+        {
+            isDead = true;
+            Dead();
+        }
+
+        if (isDead || isAttack)
             return;
 
         anim.SetFloat("isRun", inputVec.magnitude);
@@ -79,7 +95,7 @@ public class cPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (inputVec == null || isAttack || actionCameraOn)
+        if (isDead || inputVec == null || isAttack || actionCameraOn)
             return;
 
         Vector2 moveVec = inputVec * speed * Time.deltaTime;
@@ -102,19 +118,64 @@ public class cPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Skill"))
         {
             float damage = collision.gameObject.GetComponent<cSKillInfo>().damege;
-            hp -= damage;
+            ApplyDamage(damage);
             Debug.Log("플레이어 HP : " + hp);
         }
 
         if (collision.gameObject.CompareTag("Monster_Attack"))
         {
             float damage = collision.gameObject.GetComponent<cSKillInfo>().damege;
-            hp -= damage;
+            ApplyDamage(damage);
             Debug.Log("플레이어 HP : " + hp);
 
             //GameObject AttackCol = collision.gameObject.GetComponent<cOrc>().attackCollider;
             //AttackCol.SetActive(false);
         }
+    }
+
+    void SetHp()
+    {
+        float curHp = maxHp + GameManager.instance.hp;
+        
+        if (curHp != preMaxHp)
+            maxHp += GameManager.instance.hp;
+
+        preMaxHp = maxHp + GameManager.instance.hp;
+    }
+
+    void ApplyDamage(float damege)
+    {
+        hp -= damege * (1 / GameManager.instance.defen);
+
+        if (hp <= 0)
+        {
+            isDead = true;
+            Dead();
+        }
+    }
+
+    void Dead()
+    {
+        if (isDead)
+        {
+            anim.SetBool("isDead", true);
+            capCollider.enabled = false;
+            StartCoroutine("DeadScene");
+        }
+    }
+
+    IEnumerator DeadScene()
+    {
+        yield return new WaitForSeconds(2f);
+
+        Time.timeScale = 0f;
+        GameManager.instance.DeadScene.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        // 플레이어 reset
+        hp = maxHp;
+        capCollider.enabled = true;
+        anim.SetBool("isDead", false);
+        isDead = false;
     }
 
     public void Attack()

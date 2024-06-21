@@ -118,8 +118,10 @@ namespace Chapter.State
                 if (!BossArea.GetComponent<cMonsterChase>().GetisChase())
                     BossArea.GetComponent<cMonsterChase>().SetisChase(true);
 
-                hp -= collision.gameObject.GetComponent<cBullet>().skillData.skillDamage[skillLevel] + Random.Range(10, 25);
-                Debug.Log(hp + "이정도 남았다.");
+                hp -= collision.gameObject.GetComponent<cBullet>().skillData.skillDamage[skillLevel]
+                                                                                + GameManager.instance.spell
+                                                                                + Random.Range(10, 15);
+                Debug.Log("보스 HP : " + hp);
 
                 if (hp <= 0)
                     Dead();
@@ -136,17 +138,14 @@ namespace Chapter.State
             if (collision.gameObject.CompareTag("Player_Normal"))
             {
                 //데미지 얼마인지
-                hp -= GameManager.instance.player.attackPower + Random.Range(3, 8);
-                Debug.Log(hp + "이정도 남았다.");
+                hp -= GameManager.instance.str + Random.Range(5, 10);
+                Debug.Log("보스 HP : " + hp);
 
                 AttackReaction();
 
                 if (hp <= 0)
                     Dead();
             }
-
-            if (collision.gameObject.CompareTag("Player"))
-                Debug.Log("플레이어와의 충돌");
         }
 
         void AttackReaction()
@@ -187,7 +186,7 @@ namespace Chapter.State
                     }
 
                     time = 0f;
-                    Debug.Log(hp + "이정도 남았다.");
+                    Debug.Log("보스 HP : " + hp);
                     dotTick++;
                 }
                 yield return null;

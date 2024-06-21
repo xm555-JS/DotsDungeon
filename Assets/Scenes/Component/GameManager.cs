@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Player")]
     public cPlayer player;
+    public GameObject DeadScene;
     bool isActive = false;
 
     [Header("GameInfo")]
     public GameObject potal;
     public int monsterCount;
+    public bool isEnd;
     public int money;
     public float str;
     public float spell;
@@ -25,6 +27,14 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+
+        // 저장된 데이터 Load
+        //money = PlayerPrefs.GetInt("money");
+        //str = PlayerPrefs.GetFloat("str");
+        //spell = PlayerPrefs.GetFloat("spell");
+        //defen = PlayerPrefs.GetFloat("defen");
+        //hp = PlayerPrefs.GetFloat("hp");
+        //coolTime = PlayerPrefs.GetFloat("coolTime");
     }
 
     void Update()
@@ -32,6 +42,7 @@ public class GameManager : MonoBehaviour
         PotalOpen();
         PlayerActiveOn();
         Maximum();
+
         // test_code
         if (Input.GetKeyDown(KeyCode.F))
             money += 1000;
@@ -54,8 +65,16 @@ public class GameManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         if (scene.name == "Level_Stage1")
         {
+            player.transform.position = new Vector3(-9f, -0.75f, player.transform.position.z);
+            player.transform.parent.gameObject.SetActive(false);
             player.transform.parent.gameObject.SetActive(true);
             isActive = true;
+
+            potal = Resources.Load<GameObject>("Prefabs/Potal");
+            potal = Instantiate(potal);
+            potal.SetActive(false);
+
+            DeadScene = GameObject.Find("DeadScene");
         }
     }
 

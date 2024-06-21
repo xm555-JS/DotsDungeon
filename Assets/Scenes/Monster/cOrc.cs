@@ -25,15 +25,9 @@ public class cOrc : cMonster
 
     protected override void Attack(float distance)
     {
-        if (isAttack)
-            return;
-
         base.Attack(distance);
         if (isAttack)
-        {
-            Debug.Log("자식에서 Attack함수 실행");
             attackCollider.SetActive(true);
-        }
         else
             attackCollider.SetActive(false);
     }

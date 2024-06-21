@@ -22,4 +22,4 @@ MonoBehaviour:
   spell: 100
   defen: 0
   hp: 0
-  coolTime: 80
+  coolTime: 100

@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class cPotal : MonoBehaviour
 {
-    public GameObject Fade;
+    GameObject Fade;
     Vector3 playerPos;
 
     void Awake()
     {
         // 초기 플레이어 위치 설정
         playerPos = new Vector3(-9f, -0.75f, 0f);
+        Fade = GameObject.Find("TransScene");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -28,7 +29,7 @@ public class cPotal : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
-        SceneManager.LoadScene("Map1");
+        SceneManager.LoadScene("Level_Boss");
         GameManager.instance.player.transform.position = playerPos;
     }
 }

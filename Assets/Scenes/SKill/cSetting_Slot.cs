@@ -169,7 +169,16 @@ public class cSetting_Slot : MonoBehaviour
         {
             if (skillImage.sprite == skill.skillSprite)
             {
-                coolTime = skill.skillCoolTime;
+                if (GameManager.instance.coolTime > 0)
+                {
+                    Debug.Log("CoolTime : " + skill.skillCoolTime);
+                    coolTime = skill.skillCoolTime - (skill.skillCoolTime * (GameManager.instance.coolTime / 100f));
+                    Debug.Log("CoolTime : " + coolTime);
+                }
+                    
+                else
+                    coolTime = skill.skillCoolTime;
+
                 isFound = true;
             }
         }
