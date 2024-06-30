@@ -67,17 +67,17 @@ public class cPlayer : MonoBehaviour
         SetHp();
 
         //test
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            hp -= 20f;
-            Debug.Log(hp);
-        }
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    hp -= 20f;
+        //    Debug.Log(hp);
+        //}
 
-        if (hp <= 0)
-        {
-            isDead = true;
-            Dead();
-        }
+        //if (hp <= 0)
+        //{
+        //    isDead = true;
+        //    Dead();
+        //}
 
         if (isDead || isAttack)
             return;
@@ -145,7 +145,7 @@ public class cPlayer : MonoBehaviour
 
     void ApplyDamage(float damege)
     {
-        hp -= damege * (1 / GameManager.instance.defen);
+        hp -= damege  - (damege * (1 / GameManager.instance.defen));
 
         if (hp <= 0)
         {
@@ -160,6 +160,7 @@ public class cPlayer : MonoBehaviour
         {
             anim.SetBool("isDead", true);
             capCollider.enabled = false;
+            Debug.Log("죽었습니다.");
             StartCoroutine("DeadScene");
         }
     }
@@ -172,10 +173,10 @@ public class cPlayer : MonoBehaviour
         GameManager.instance.DeadScene.transform.localScale = new Vector3(1f, 1f, 1f);
 
         // 플레이어 reset
+        isDead = false;
         hp = maxHp;
         capCollider.enabled = true;
         anim.SetBool("isDead", false);
-        isDead = false;
     }
 
     public void Attack()
@@ -237,6 +238,8 @@ public class cPlayer : MonoBehaviour
             return;
 
         Passive_Skill("Heal");
+        hp += 20f;
+        Debug.Log("플레이어 HP 회복! HP : " + hp);
     }
 
     public void OnAttackAnimEnd()

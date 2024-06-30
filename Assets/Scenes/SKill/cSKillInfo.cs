@@ -9,7 +9,7 @@ public class cSKillInfo : MonoBehaviour
 
     void Start()
     {
-        damege += Random.Range(5f, 10f);
-        skillDamage += Random.Range(20f, 25f);
+        damege += Random.Range(0f, 5f);
+        skillDamage += Random.Range(10f, 15f);
     }
 }

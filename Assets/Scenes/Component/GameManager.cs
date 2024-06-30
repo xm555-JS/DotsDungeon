@@ -23,29 +23,43 @@ public class GameManager : MonoBehaviour
     public float defen;
     public float hp;
     public float coolTime;
+    public float gameTime;
+    //public int key;
+    //public int itemKey;
+
+    Scene preScene;
+    private GameObject reward;
 
     void Awake()
     {
         instance = this;
 
-        // 저장된 데이터 Load
-        //money = PlayerPrefs.GetInt("money");
-        //str = PlayerPrefs.GetFloat("str");
-        //spell = PlayerPrefs.GetFloat("spell");
-        //defen = PlayerPrefs.GetFloat("defen");
-        //hp = PlayerPrefs.GetFloat("hp");
-        //coolTime = PlayerPrefs.GetFloat("coolTime");
+        if (PlayerPrefs.HasKey("Key"))
+        {
+            // 저장된 데이터 Load
+            money = PlayerPrefs.GetInt("money");
+            str = PlayerPrefs.GetFloat("str");
+            spell = PlayerPrefs.GetFloat("spell");
+            defen = PlayerPrefs.GetFloat("defen");
+            hp = PlayerPrefs.GetFloat("hp");
+            coolTime = PlayerPrefs.GetFloat("coolTime");
+        }
     }
 
     void Update()
     {
+        SceneSetting();
+        GameTime();
         PotalOpen();
-        PlayerActiveOn();
         Maximum();
+        GameReward();
+
+        if (player == null)
+            Debug.Log("player가 없습니다");
 
         // test_code
         if (Input.GetKeyDown(KeyCode.F))
-            money += 1000;
+            money += 10000;
     }
 
     void PotalOpen()
@@ -57,12 +71,20 @@ public class GameManager : MonoBehaviour
             potal.SetActive(true);
     }
 
-    void PlayerActiveOn()
+    void SceneSetting()
     {
+        Scene scene = SceneManager.GetActiveScene();
+
+        if (preScene != scene)
+            isActive = false;
+
         if (isActive)
             return;
 
-        Scene scene = SceneManager.GetActiveScene();
+        instance = this;
+
+        preScene = SceneManager.GetActiveScene();
+
         if (scene.name == "Level_Stage1")
         {
             player.transform.position = new Vector3(-9f, -0.75f, player.transform.position.z);
@@ -76,11 +98,64 @@ public class GameManager : MonoBehaviour
 
             DeadScene = GameObject.Find("DeadScene");
         }
+
+        if (scene.name == "Level_Boss")
+        {
+            reward = Resources.Load<GameObject>("UI_Prefabs/Reward");
+            reward = Instantiate(reward);
+            GameObject parent = GameObject.Find("Canvas");
+            reward.transform.SetParent(parent.transform);
+            //reward.transform.position = new Vector3(0f, 0f, 0f);
+            RectTransform recttransfom = reward.GetComponent<RectTransform>();
+            recttransfom.anchoredPosition = new Vector3(0f, 0f, 0f);
+            isActive = true;
+        }
+
+
+        if (scene.name == "Level_Lobby")
+        {
+            player.transform.position = new Vector3(-7.5f, -1f, player.transform.position.z);
+            player.transform.localScale = new Vector3(-1f, 1f, 1f);
+            player.transform.parent.gameObject.SetActive(false);
+            player.transform.parent.gameObject.SetActive(true);
+            gameTime = 0f;
+            isActive = true;
+        }
     }
 
     void Maximum()
     {
         if (money >= 1000000)
             money = 1000000;
+    }
+
+    void GameTime()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "Level_Stage1" || scene.name == "Level_Boss")
+        {
+            gameTime += Time.deltaTime;
+        }
+    }
+
+    void GameReward()
+    {
+        if (isEnd)
+        {
+            StartCoroutine("ShowReward");
+            isEnd = false;
+        }
+    }
+
+    IEnumerator ShowReward()
+    {
+        yield return new WaitForSeconds(2f);
+
+        Transform[] obj = reward.GetComponentsInChildren<Transform>(true);
+        for (int i = 0; i < obj.Length; i++)
+        {
+            obj[i].gameObject.SetActive(true);
+        }
+
     }
 }

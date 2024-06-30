@@ -9,10 +9,6 @@ public class cDontDestroyLoad_Canvas : MonoBehaviour
 
     void Awake()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        if (scene.name == "Level_Lobby")
-            Destroy(gameObject);
-
         if (dontDestoryObjects.Contains(gameObject.name))
         {
             Destroy(gameObject);
@@ -21,5 +17,19 @@ public class cDontDestroyLoad_Canvas : MonoBehaviour
 
         dontDestoryObjects.Add(gameObject.name);
         DontDestroyOnLoad(gameObject);
+    }
+    private void Update()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "Level_Lobby")
+        {
+            // Level_Lobby 씬에서는 자신을 파괴하지 않음
+            if (dontDestoryObjects.Contains(gameObject.name))
+            {
+                dontDestoryObjects.Remove(gameObject.name);
+            }
+            Destroy(gameObject);
+        }
+
     }
 }

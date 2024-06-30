@@ -124,7 +124,12 @@ namespace Chapter.State
                 Debug.Log("º¸½º HP : " + hp);
 
                 if (hp <= 0)
+                {
+                    if (isDead)
+                        return;
                     Dead();
+                }
+                    
 
                 dotdamage(collision, "Fire");
                 dotdamage(collision, "Ice");
@@ -144,7 +149,12 @@ namespace Chapter.State
                 AttackReaction();
 
                 if (hp <= 0)
+                {
+                    if (isDead)
+                        return;
                     Dead();
+                }
+                    
             }
         }
 
@@ -247,6 +257,7 @@ namespace Chapter.State
         void Dead()
         {
             isDead = true;
+            GameManager.instance.isEnd = true;
             _bossController.DeadState();
         }
     }

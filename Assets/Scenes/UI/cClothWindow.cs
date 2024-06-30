@@ -7,6 +7,7 @@ public class cClothWindow : MonoBehaviour
 {
     public GameObject purchaseItem;
     private cItemData itemData;
+    private SaveAndLoad saveAndLoad;
 
     private GameObject preObj;
     private float preStr;
@@ -17,7 +18,11 @@ public class cClothWindow : MonoBehaviour
 
     public void Purchase_Item(cItemData itemdata)
     {
+        saveAndLoad = FindObjectOfType<SaveAndLoad>();
         itemData = itemdata;
+
+        // 저장할 아이템이 생겼다는 표시
+        PlayerPrefs.SetInt("itemKey", 1);
 
         // purchase item prepab을 복제한다.
         GameObject item = Instantiate(purchaseItem, this.transform);
@@ -43,6 +48,9 @@ public class cClothWindow : MonoBehaviour
 
         Button itemButton = item.GetComponent<Button>();
         itemButton.onClick.AddListener(SetButton);
+
+        //string spritePath = AssetDatabase.GetAssetPath(itemdata.itemSprite);
+        saveAndLoad.save(itemdata);
     }
 
     void SetButton()
@@ -65,5 +73,8 @@ public class cClothWindow : MonoBehaviour
         preDefen = objData.defen;
         preHp = objData.hp;
         preCoolTime = objData.coolTime;
+
+        // 마지막 데이터 저장
+        //DataLoad dataLoad = new DataLoad(preObj, preStr, preSpell, preDefen, preHp, preCoolTime);
     }
 }

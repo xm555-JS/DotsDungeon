@@ -12,6 +12,7 @@ public class cQuit : MonoBehaviour
         PlayerPrefs.SetFloat("defen", GameManager.instance.defen);
         PlayerPrefs.SetFloat("hp", GameManager.instance.hp);
         PlayerPrefs.SetFloat("coolTime", GameManager.instance.coolTime);
+        PlayerPrefs.SetInt("Key", 1);
 
         Application.Quit();
     }

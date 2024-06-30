@@ -92,7 +92,7 @@ namespace Chapter.State
             float posX = pos.x;
 
             GameObject obj = Instantiate(skill);
-            if (obj.name != "magicSkill")
+            if (obj.name != "Fire_Ball(Clone)")
                 obj.transform.SetParent(this.transform);
 
             float scaleX = obj.transform.localScale.x;

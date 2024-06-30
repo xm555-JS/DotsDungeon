@@ -225,6 +225,7 @@ public class cMonster : MonoBehaviour
         if (isDead)
             return;
 
+        rigid.velocity = Vector3.zero;
         isDead = true;
         ++GameManager.instance.monsterCount;
         DropItem();
