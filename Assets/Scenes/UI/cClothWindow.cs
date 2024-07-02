@@ -6,19 +6,50 @@ using UnityEngine.UI;
 public class cClothWindow : MonoBehaviour
 {
     public GameObject purchaseItem;
+    public List<cItemData> saveItemData = new List<cItemData>();
     private cItemData itemData;
-    private SaveAndLoad saveAndLoad;
 
-    private GameObject preObj;
-    private float preStr;
-    private float preSpell;
-    private float preDefen;
-    private float preHp;
-    private float preCoolTime;
+    public GameObject preObj;
+    public float preStr;
+    public float preSpell;
+    public float preDefen;
+    public float preHp;
+    public float preCoolTime;
+
+    void Start()
+    {
+        // 저장된 데이터가 있으면 적용
+        if (PlayerPrefs.HasKey("Key"))
+        {
+            if (PlayerPrefs.HasKey("itemKey"))
+            {
+                if (!preObj)
+                    return;
+
+                if (this.name == "Cloth_Item_Helmet")
+                {
+                    preObj.name = PlayerPrefs.GetString("Using_Helmet_Name");
+                    preStr = PlayerPrefs.GetFloat("Using_Helmet_Str");
+                    preSpell = PlayerPrefs.GetFloat("Using_Helmet_Spell");
+                    preDefen = PlayerPrefs.GetFloat("Using_Helmet_Defen");
+                    preHp = PlayerPrefs.GetFloat("Using_Helmet_Hp");
+                    preCoolTime = PlayerPrefs.GetFloat("Using_Helmet_CoolTime");
+                }
+                else if (this.name == "Cloth_Item_Armor")
+                {
+                    preObj.name = PlayerPrefs.GetString("Using_Armor_Name");
+                    preStr = PlayerPrefs.GetFloat("Using_Armor_Str");
+                    preSpell = PlayerPrefs.GetFloat("Using_Armor_Spell");
+                    preDefen = PlayerPrefs.GetFloat("Using_Armor_Defen");
+                    preHp = PlayerPrefs.GetFloat("Using_Armor_Hp");
+                    preCoolTime = PlayerPrefs.GetFloat("Using_Armor_CoolTime");
+                }
+            }
+        }
+    }
 
     public void Purchase_Item(cItemData itemdata)
     {
-        saveAndLoad = FindObjectOfType<SaveAndLoad>();
         itemData = itemdata;
 
         // 저장할 아이템이 생겼다는 표시
@@ -49,11 +80,10 @@ public class cClothWindow : MonoBehaviour
         Button itemButton = item.GetComponent<Button>();
         itemButton.onClick.AddListener(SetButton);
 
-        //string spritePath = AssetDatabase.GetAssetPath(itemdata.itemSprite);
-        saveAndLoad.save(itemdata);
+        saveItemData.Add(itemdata);
     }
 
-    void SetButton()
+    public void SetButton()
     {
         GameObject obj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         cItemData objData = obj.GetComponent<cData>().itemdata;
@@ -73,8 +103,5 @@ public class cClothWindow : MonoBehaviour
         preDefen = objData.defen;
         preHp = objData.hp;
         preCoolTime = objData.coolTime;
-
-        // 마지막 데이터 저장
-        //DataLoad dataLoad = new DataLoad(preObj, preStr, preSpell, preDefen, preHp, preCoolTime);
     }
 }

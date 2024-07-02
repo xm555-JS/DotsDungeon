@@ -4622,6 +4622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdf0d88c1e78c94caa36fdc99497938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveAndLoad: {fileID: 778690797}
 --- !u!1 &752772585
 GameObject:
   m_ObjectHideFlags: 0
@@ -5087,7 +5088,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b077efa85ed4c444a89835ce15bac918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj: {fileID: 0}
+  prefab: {fileID: 5199266413751660133, guid: 0b37db2c885a579478df173c7230824d, type: 3}
+  cloth_Helmet: {fileID: 1921913521}
+  cloth_Armor: {fileID: 869323529}
 --- !u!1 &780841431
 GameObject:
   m_ObjectHideFlags: 0
@@ -5606,6 +5609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   purchaseItem: {fileID: 5199266413751660133, guid: 0b37db2c885a579478df173c7230824d, type: 3}
+  saveItemData: []
 --- !u!114 &869323532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19906,6 +19910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   purchaseItem: {fileID: 5199266413751660133, guid: 0b37db2c885a579478df173c7230824d, type: 3}
+  saveItemData: []
 --- !u!1 &1925382465
 GameObject:
   m_ObjectHideFlags: 0

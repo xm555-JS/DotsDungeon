@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class cQuit : MonoBehaviour
 {
+    public GameObject saveAndLoad;
     public void Game_Quit()
     {
+        // 돈, 스텟 저장
         PlayerPrefs.SetInt("money", GameManager.instance.money);
         PlayerPrefs.SetFloat("str", GameManager.instance.str);
         PlayerPrefs.SetFloat("spell", GameManager.instance.spell);
@@ -13,6 +15,9 @@ public class cQuit : MonoBehaviour
         PlayerPrefs.SetFloat("hp", GameManager.instance.hp);
         PlayerPrefs.SetFloat("coolTime", GameManager.instance.coolTime);
         PlayerPrefs.SetInt("Key", 1);
+
+        // 아이템 저장
+        saveAndLoad.GetComponent<SaveAndLoad>().save();
 
         Application.Quit();
     }
