@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e638f849a6714e746963365bd0aea49a, type: 3}
+  m_Name: empty
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: afacb48c4aaf24b91a94b80dcb0d8fb0, type: 3}
+  itmeType: .
+  itemName: .
+  itemDesc: .
+  itemPrice: .
+  price: 0
+  str: 0
+  spell: 0
+  defen: 0
+  hp: 0
+  coolTime: 0

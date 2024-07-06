@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class cClothWindow : MonoBehaviour
 {
     public GameObject purchaseItem;
-    public List<cItemData> saveItemData = new List<cItemData>();
+    //public List<cItemData> saveItemData = new List<cItemData>();
+    public List<cItemData> saveItemData_Helmet = new List<cItemData>();
+    public List<cItemData> saveItemData_Armor = new List<cItemData>();
     private cItemData itemData;
 
     public GameObject preObj;
@@ -16,19 +18,53 @@ public class cClothWindow : MonoBehaviour
     public float preHp;
     public float preCoolTime;
 
-    void Start()
+    public void Initialize()
     {
         // 저장된 데이터가 있으면 적용
         if (PlayerPrefs.HasKey("Key"))
         {
             if (PlayerPrefs.HasKey("itemKey"))
             {
-                if (!preObj)
-                    return;
+                string usingItemName_Helmet = PlayerPrefs.GetString("Using_Helmet_Name");
+                string usingItemName_Armor = PlayerPrefs.GetString("Using_Armor_Name");
+
+                GameObject[] item = GameObject.FindGameObjectsWithTag("PurchaseItem");
+                foreach (GameObject obj in item)
+                {
+                    if (obj.GetComponent<cData>().itemdata.itmeType == "Helmet")
+                    {
+                        saveItemData_Helmet.Add(obj.GetComponent<cData>().itemdata);
+
+                        if (obj.GetComponent<cData>().itemdata.itemName == usingItemName_Helmet)
+                        {
+                            cItemData objData = obj.GetComponent<cData>().itemdata;
+                            preObj = obj;
+                            //preStr = objData.str;
+                            //preSpell = objData.spell;
+                            //preDefen = objData.defen;
+                            //preHp = objData.hp;
+                            //preCoolTime = objData.coolTime;
+                        }
+                    }
+                    else if (obj.GetComponent<cData>().itemdata.itmeType == "Armor")
+                    {
+                        saveItemData_Armor.Add(obj.GetComponent<cData>().itemdata);
+
+                        if (obj.GetComponent<cData>().itemdata.itemName == usingItemName_Armor)
+                        {
+                            cItemData objData = obj.GetComponent<cData>().itemdata;
+                            preObj = obj;
+                            //preStr = objData.str;
+                            //preSpell = objData.spell;
+                            //preDefen = objData.defen;
+                            //preHp = objData.hp;
+                            //preCoolTime = objData.coolTime;
+                        }
+                    }
+                }
 
                 if (this.name == "Cloth_Item_Helmet")
                 {
-                    preObj.name = PlayerPrefs.GetString("Using_Helmet_Name");
                     preStr = PlayerPrefs.GetFloat("Using_Helmet_Str");
                     preSpell = PlayerPrefs.GetFloat("Using_Helmet_Spell");
                     preDefen = PlayerPrefs.GetFloat("Using_Helmet_Defen");
@@ -37,15 +73,19 @@ public class cClothWindow : MonoBehaviour
                 }
                 else if (this.name == "Cloth_Item_Armor")
                 {
-                    preObj.name = PlayerPrefs.GetString("Using_Armor_Name");
                     preStr = PlayerPrefs.GetFloat("Using_Armor_Str");
                     preSpell = PlayerPrefs.GetFloat("Using_Armor_Spell");
                     preDefen = PlayerPrefs.GetFloat("Using_Armor_Defen");
                     preHp = PlayerPrefs.GetFloat("Using_Armor_Hp");
                     preCoolTime = PlayerPrefs.GetFloat("Using_Armor_CoolTime");
                 }
+
+                if (!preObj)
+                    preObj = purchaseItem;
             }
         }
+        else
+            preObj = purchaseItem;
     }
 
     public void Purchase_Item(cItemData itemdata)
@@ -80,15 +120,17 @@ public class cClothWindow : MonoBehaviour
         Button itemButton = item.GetComponent<Button>();
         itemButton.onClick.AddListener(SetButton);
 
-        saveItemData.Add(itemdata);
+        if (item.GetComponent<cData>().itemdata.itmeType == "Helmet")
+            saveItemData_Helmet.Add(itemdata);
+        else if (item.GetComponent<cData>().itemdata.itmeType == "Armor")
+            saveItemData_Armor.Add(itemdata);
     }
 
     public void SetButton()
     {
         GameObject obj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         cItemData objData = obj.GetComponent<cData>().itemdata;
-
-        if (preObj == obj)
+        if (preObj.GetComponent<cData>().itemdata.itemName == objData.itemName)
             return;
 
         GameManager.instance.str += objData.str - preStr;

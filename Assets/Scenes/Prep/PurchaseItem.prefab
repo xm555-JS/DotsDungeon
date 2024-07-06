@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4787621248127076903}
   m_Layer: 5
   m_Name: PurchaseItem
-  m_TagString: Untagged
+  m_TagString: PurchaseItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0be25f271ca67746a8404ac09b65e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemdata: {fileID: 0}
+  itemdata: {fileID: 11400000, guid: 5bd891a4f13247a4d94acbdb1e3988a6, type: 2}
 --- !u!1 &5199266413798046628
 GameObject:
   m_ObjectHideFlags: 0

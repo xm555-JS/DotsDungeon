@@ -39,7 +39,6 @@ public class cMoney : MonoBehaviour
     void SetPos()
     {
         int log10 = (int)Mathf.Log10(money);
-        Debug.Log(log10);
         float posX = 81f - (6f * (float)log10);
 
         Vector3 curentPos = rectTransform.anchoredPosition;

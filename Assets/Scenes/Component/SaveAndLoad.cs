@@ -45,12 +45,12 @@ public class SaveAndLoad : MonoBehaviour
 
     public void save()
     {
-        foreach (cItemData data in cloth_Helmet.GetComponent<cClothWindow>().saveItemData)
+        foreach (cItemData data in cloth_Helmet.GetComponent<cClothWindow>().saveItemData_Helmet)
         {
             ItemLoad saveItem = new ItemLoad(data);
             itemsToLoad.Add(saveItem);
         }
-        foreach (cItemData data in cloth_Armor.GetComponent<cClothWindow>().saveItemData)
+        foreach (cItemData data in cloth_Armor.GetComponent<cClothWindow>().saveItemData_Armor)
         {
             ItemLoad saveItem = new ItemLoad(data);
             itemsToLoad.Add(saveItem);
@@ -71,10 +71,7 @@ public class SaveAndLoad : MonoBehaviour
         Debug.Log("Loading...");
         List<ItemLoad> itemToLoad = CustomJSON.FromJson<ItemLoad>(File.ReadAllText(Application.persistentDataPath + transform.name));
 
-
         Debug.Log(itemToLoad.Count);
-        Debug.Log(itemToLoad[0].itemData);
-        Debug.Log(itemToLoad[1].itemData);
 
         // 들어오는거 확인했으니까 save된 itemdata로 각각 부모, 이미지, 설명, 이름 등등 필요한거 채워서 만들면 어떻게든 될거 같은데...
         for (int i = 0; i < itemToLoad.Count; i++)
@@ -120,7 +117,7 @@ public class SaveAndLoad : MonoBehaviour
         // 사용중인 헬멧 데이터 저장
         cClothWindow helmet = cloth_Helmet.GetComponent<cClothWindow>();
         if (helmet.preObj)
-            PlayerPrefs.SetString("Using_Helmet_Name", helmet.preObj.name);
+            PlayerPrefs.SetString("Using_Helmet_Name", helmet.preObj.GetComponent<cData>().itemdata.itemName);
         PlayerPrefs.SetFloat("Using_Helmet_Str", helmet.preStr);
         PlayerPrefs.SetFloat("Using_Helmet_Spell", helmet.preSpell);
         PlayerPrefs.SetFloat("Using_Helmet_Defen", helmet.preDefen);
@@ -130,7 +127,7 @@ public class SaveAndLoad : MonoBehaviour
         // 사용중인 갑옷 데이터 저장
         cClothWindow armor = cloth_Armor.GetComponent<cClothWindow>();
         if (armor.preObj)
-            PlayerPrefs.SetString("Using_Armor_Name", armor.preObj.name);
+            PlayerPrefs.SetString("Using_Armor_Name", armor.preObj.GetComponent<cData>().itemdata.itemName);
         PlayerPrefs.SetFloat("Using_Armor_Str", armor.preStr);
         PlayerPrefs.SetFloat("Using_Armor_Spell", armor.preSpell);
         PlayerPrefs.SetFloat("Using_Armor_Defen", armor.preDefen);
@@ -145,7 +142,19 @@ public class SaveAndLoad : MonoBehaviour
             if (PlayerPrefs.HasKey("itemKey"))
             {
                 Load();
+                cloth_Helmet.transform.parent.gameObject.SetActive(true);
+                cloth_Helmet.SetActive(true);
+                cloth_Armor.SetActive(true);
+                cloth_Helmet.GetComponent<cClothWindow>().Initialize();
+                cloth_Armor.GetComponent<cClothWindow>().Initialize();
+                cloth_Helmet.SetActive(false);
+                cloth_Helmet.transform.parent.gameObject.SetActive(false);
             }
+        }
+        else
+        {
+            cloth_Helmet.GetComponent<cClothWindow>().Initialize();
+            cloth_Armor.GetComponent<cClothWindow>().Initialize();
         }
     }
 }

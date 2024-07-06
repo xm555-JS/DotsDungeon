@@ -136,17 +136,25 @@ public class cPlayer : MonoBehaviour
     void SetHp()
     {
         float curHp = maxHp + GameManager.instance.hp;
-        
+
         if (curHp != preMaxHp)
+        {
             maxHp += GameManager.instance.hp;
+            hp = maxHp;
+            Debug.Log(maxHp);
+        }
 
         preMaxHp = maxHp + GameManager.instance.hp;
     }
 
     void ApplyDamage(float damege)
     {
-        hp -= damege  - (damege * (1 / GameManager.instance.defen));
+        float defense = GameManager.instance.defen * 0.3f;
+        float applyDamage =  damege - (defense);
+        if (damege <= defense)
+            applyDamage = 1;
 
+            hp -= applyDamage;
         if (hp <= 0)
         {
             isDead = true;

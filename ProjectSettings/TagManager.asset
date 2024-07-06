@@ -13,6 +13,7 @@ TagManager:
   - Monster
   - Monster_Attack
   - Player_Normal
+  - PurchaseItem
   layers:
   - Default
   - TransparentFX
