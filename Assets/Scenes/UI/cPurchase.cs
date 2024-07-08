@@ -57,6 +57,9 @@ public class cPurchase : MonoBehaviour
         else
         {
             Debug.Log("돈이 부족합니다.");
+
+            // audio
+            AudioManager.instance.PlayerSfx(AudioManager.Sfx.DENIED);
         }
     }
 
@@ -84,6 +87,9 @@ public class cPurchase : MonoBehaviour
     {
         isDecide = true;
         answer = true;
+
+        // audio
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.BUY);
     }
 
     public void CheckBox_No()
@@ -91,5 +97,8 @@ public class cPurchase : MonoBehaviour
         isDecide = true;
         answer = false;
         btn.interactable = true;
+
+        // audio
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.DENIED);
     }
 }

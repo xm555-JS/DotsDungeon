@@ -97,6 +97,9 @@ public class GameManager : MonoBehaviour
             potal.SetActive(false);
 
             DeadScene = GameObject.Find("DeadScene");
+
+            // bgm
+            AudioManager.instance.PlayBgm(AudioManager.Bgm.STAGE);
         }
 
         if (scene.name == "Level_Boss")
@@ -109,6 +112,9 @@ public class GameManager : MonoBehaviour
             RectTransform recttransfom = reward.GetComponent<RectTransform>();
             recttransfom.anchoredPosition = new Vector3(0f, 0f, 0f);
             isActive = true;
+
+            // bgm
+            AudioManager.instance.PlayBgm(AudioManager.Bgm.BOSS);
         }
 
 
@@ -120,6 +126,9 @@ public class GameManager : MonoBehaviour
             player.transform.parent.gameObject.SetActive(true);
             gameTime = 0f;
             isActive = true;
+
+            // bgm
+            AudioManager.instance.PlayBgm(AudioManager.Bgm.LOBBY);
         }
     }
 

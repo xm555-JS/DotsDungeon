@@ -9,10 +9,16 @@ public class cOption : MonoBehaviour
     public void Open_Option_Window()
     {
         option_Window.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        // audio
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.CONFIRM);
     }
 
     public void Close_Option_Window()
     {
         option_Window.transform.localScale = new Vector3(0f, 0f, 0f);
+
+        // audio
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.DENIED);
     }
 }

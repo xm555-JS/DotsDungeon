@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [Header("#BGM")]
-    public AudioClip bgmClip;
+    public AudioClip[] bgmClips;
     public float bgmVolume;
     AudioSource bgmPlayer;
 
@@ -18,7 +18,8 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channellIndex;
 
-    public enum Sfx { a, b, c };
+    public enum Sfx { BUY, CLICK, CONFIRM, DENIED, EQUIP, OPENWINDOW, ATTACK, DEAD, STEP, HEAL, FIRE, FIREBALL, ICE, POISION };
+    public enum Bgm { START, LOBBY, STAGE, BOSS };
 
     void Awake()
     {
@@ -35,7 +36,6 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
-        bgmPlayer.clip = bgmClip;
 
         // 효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("sfxPlayer");
@@ -49,12 +49,27 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayBgm(bool isPlay)
+    public void PlayBgm(Bgm bgm)
     {
-        if (isPlay)
-            bgmPlayer.Play();
-        else
-            bgmPlayer.Stop();
+        if (bgmPlayer.isPlaying)
+            StartCoroutine("ChangeBgm");
+
+        bgmPlayer.clip = bgmClips[(int)bgm];
+        bgmPlayer.volume = bgmVolume;
+        bgmPlayer.Play();
+    }
+
+    IEnumerator ChangeBgm()
+    {
+        float time = 0f;
+        float fadeTime = 1f;
+        while (bgmPlayer.volume <= 0f)
+        {
+            time += Time.deltaTime;
+            float volume = Mathf.Lerp(0f, bgmVolume, time / fadeTime);
+            bgmPlayer.volume = volume;
+            yield return null;
+        }
     }
 
     public void PlayerSfx(Sfx sfx)

@@ -7,11 +7,15 @@ public class cSceneChange : MonoBehaviour
 {
     public void SceneChange_Level_Lobby()
     {
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.CONFIRM);
+
         StartCoroutine("StartSceneLoad_Lobby");
     }
 
     public void SceneChange_Level_Stage()
     {
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.CONFIRM);
+
         StartCoroutine("StartSceneLoad_Stage");
     }
 

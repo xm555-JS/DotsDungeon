@@ -145,5 +145,8 @@ public class cClothWindow : MonoBehaviour
         preDefen = objData.defen;
         preHp = objData.hp;
         preCoolTime = objData.coolTime;
+
+        // audio
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.EQUIP);
     }
 }
