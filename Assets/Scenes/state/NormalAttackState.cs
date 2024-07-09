@@ -17,6 +17,9 @@ namespace Chapter.State
             Debug.Log("NormalAttackState");
             anim.SetTrigger("isBossNormalAttack");
             this.gameObject.GetComponent<ChaseState>().SetSpeed(0f);
+
+            // audio
+            AudioManager.instance.PlayerSfx(AudioManager.Sfx.ATTACK);
         }
 
         void Awake()

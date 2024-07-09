@@ -39,11 +39,6 @@ public class cClothWindow : MonoBehaviour
                         {
                             cItemData objData = obj.GetComponent<cData>().itemdata;
                             preObj = obj;
-                            //preStr = objData.str;
-                            //preSpell = objData.spell;
-                            //preDefen = objData.defen;
-                            //preHp = objData.hp;
-                            //preCoolTime = objData.coolTime;
                         }
                     }
                     else if (obj.GetComponent<cData>().itemdata.itmeType == "Armor")
@@ -54,11 +49,6 @@ public class cClothWindow : MonoBehaviour
                         {
                             cItemData objData = obj.GetComponent<cData>().itemdata;
                             preObj = obj;
-                            //preStr = objData.str;
-                            //preSpell = objData.spell;
-                            //preDefen = objData.defen;
-                            //preHp = objData.hp;
-                            //preCoolTime = objData.coolTime;
                         }
                     }
                 }
@@ -128,6 +118,9 @@ public class cClothWindow : MonoBehaviour
 
     public void SetButton()
     {
+        // audio
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.EQUIP);
+
         GameObject obj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
         cItemData objData = obj.GetComponent<cData>().itemdata;
         if (preObj.GetComponent<cData>().itemdata.itemName == objData.itemName)
@@ -146,7 +139,6 @@ public class cClothWindow : MonoBehaviour
         preHp = objData.hp;
         preCoolTime = objData.coolTime;
 
-        // audio
-        AudioManager.instance.PlayerSfx(AudioManager.Sfx.EQUIP);
+
     }
 }

@@ -24,8 +24,6 @@ public class GameManager : MonoBehaviour
     public float hp;
     public float coolTime;
     public float gameTime;
-    //public int key;
-    //public int itemKey;
 
     Scene preScene;
     private GameObject reward;

@@ -21,4 +21,9 @@ public class cQuit : MonoBehaviour
 
         Application.Quit();
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

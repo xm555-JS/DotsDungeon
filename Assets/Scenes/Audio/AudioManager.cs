@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     public float bgmVolume;
     AudioSource bgmPlayer;
 
+    public enum Bgm { START, LOBBY, STAGE, BOSS };
+
     [Header("#SFX")]
     public AudioClip[] sfxClips;
     public float sfxVolume;
@@ -18,8 +20,7 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channellIndex;
 
-    public enum Sfx { BUY, CLICK, CONFIRM, DENIED, EQUIP, OPENWINDOW, ATTACK, DEAD, STEP, HEAL, FIRE, FIREBALL, ICE, POISION };
-    public enum Bgm { START, LOBBY, STAGE, BOSS };
+    public enum Sfx { BUY, CLICK, CONFIRM, DENIED, EQUIP, OPENWINDOW, ATTACK, DEAD, STEP, HEAL, FIRE, FIREBALL, ICE, POISION, Hit };
 
     void Awake()
     {
@@ -85,6 +86,19 @@ public class AudioManager : MonoBehaviour
             sfxPlayers[loopIndex].clip = sfxClips[(int)sfx];
             sfxPlayers[loopIndex].Play();
             break;
+        }
+    }
+
+    public void SetBgmVolume(float volume)
+    {
+        bgmPlayer.volume = volume;
+    }
+
+    public void SetSfxVolume(float volume)
+    {
+        for (int i = 0; i < sfxPlayers.Length; i++)
+        {
+            sfxPlayers[i].volume = volume;
         }
     }
 }

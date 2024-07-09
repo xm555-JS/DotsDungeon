@@ -17,6 +17,9 @@ namespace Chapter.State
             Debug.Log("MagicSkillState");
             anim.SetTrigger("isBossMagicSkill");
             this.gameObject.GetComponent<ChaseState>().SetSpeed(0f);
+
+            // audio
+            AudioManager.instance.PlayerSfx(AudioManager.Sfx.FIREBALL);
         }
 
         void Awake()

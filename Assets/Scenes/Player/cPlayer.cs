@@ -38,6 +38,8 @@ public class cPlayer : MonoBehaviour
 
     bool actionCameraOn = false;
 
+    float stepTime;
+
     public cSkillData returnData() { return skillData; }
     public void SetisSkillSetting(bool _isSkillSetting) { isSkillSetting = _isSkillSetting; }
     public bool GetisSkillSetting() { return isSkillSetting; }
@@ -66,19 +68,6 @@ public class cPlayer : MonoBehaviour
     {
         SetHp();
 
-        //test
-        //if (Input.GetKeyDown(KeyCode.H))
-        //{
-        //    hp -= 20f;
-        //    Debug.Log(hp);
-        //}
-
-        //if (hp <= 0)
-        //{
-        //    isDead = true;
-        //    Dead();
-        //}
-
         if (isDead || isAttack)
             return;
 
@@ -86,10 +75,23 @@ public class cPlayer : MonoBehaviour
 
         if (inputVec.x != 0f)
         {
+            // audio
+            stepTime += Time.deltaTime;
+            if (stepTime >= 0.5f)
+            {
+                AudioManager.instance.PlayerSfx(AudioManager.Sfx.STEP);
+                stepTime = 0;
+            }
+                
             if (inputVec.x > 0)
+            {
                 transform.localScale = new Vector3(-1, 1, 1);
+
+            }
             else
+            {
                 transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 
@@ -113,6 +115,9 @@ public class cPlayer : MonoBehaviour
         {
             skillData = collision.gameObject.GetComponent<cItem>().skillData;
             collision.gameObject.SetActive(false);
+
+            // audio 획득
+            AudioManager.instance.PlayerSfx(AudioManager.Sfx.CONFIRM);
         }
 
         if (collision.gameObject.CompareTag("Skill"))
@@ -149,12 +154,15 @@ public class cPlayer : MonoBehaviour
 
     void ApplyDamage(float damege)
     {
+        // audio 피격
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.Hit);
+
         float defense = GameManager.instance.defen * 0.3f;
-        float applyDamage =  damege - (defense);
+        float applyDamage = damege - (defense);
         if (damege <= defense)
             applyDamage = 1;
 
-            hp -= applyDamage;
+        hp -= applyDamage;
         if (hp <= 0)
         {
             isDead = true;
@@ -166,6 +174,9 @@ public class cPlayer : MonoBehaviour
     {
         if (isDead)
         {
+            // audio 피격
+            AudioManager.instance.PlayerSfx(AudioManager.Sfx.DEAD);
+
             anim.SetBool("isDead", true);
             capCollider.enabled = false;
             Debug.Log("죽었습니다.");
@@ -198,6 +209,9 @@ public class cPlayer : MonoBehaviour
 
         StartCoroutine("AttackColliderActive");
         StartCoroutine("DefaultAttack");
+
+        // audio 공격
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.ATTACK);
     }
 
     IEnumerator AttackColliderActive()
@@ -221,6 +235,9 @@ public class cPlayer : MonoBehaviour
             return;
 
         Active_Skill("Fire_Shoot");
+
+        // audio fire shoot
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.FIRE);
     }
 
     public void Ice_Shoot()
@@ -230,6 +247,8 @@ public class cPlayer : MonoBehaviour
 
         Active_Skill("Ice_Shoot");
 
+        // audio ice shoot
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.ICE);
     }
 
     public void Poision_Shoot()
@@ -238,6 +257,9 @@ public class cPlayer : MonoBehaviour
             return;
 
         Active_Skill("Poision_Shoot");
+
+        // audio posion shoot
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.POISION);
     }
 
     public void Heal()
@@ -248,6 +270,9 @@ public class cPlayer : MonoBehaviour
         Passive_Skill("Heal");
         hp += 20f;
         Debug.Log("플레이어 HP 회복! HP : " + hp);
+
+        // audio heal
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.HEAL);
     }
 
     public void OnAttackAnimEnd()
