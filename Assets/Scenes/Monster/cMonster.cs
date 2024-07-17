@@ -71,6 +71,9 @@ public class cMonster : MonoBehaviour
                                                                                 + Random.Range(10, 15);
             Debug.Log("몬스터 HP : " + hp);
 
+            // audio 피격
+            AudioManager.instance.PlayerSfx(AudioManager.Sfx.HIT);
+
             if (hp <= 0)
                 Dead();
 
@@ -89,6 +92,9 @@ public class cMonster : MonoBehaviour
             //데미지 얼마인지
             hp -= GameManager.instance.str + Random.Range(5, 10);
             Debug.Log("몬스터 HP : " + hp);
+
+            // audio 피격
+            AudioManager.instance.PlayerSfx(AudioManager.Sfx.HIT);
 
             AttackReaction();
 

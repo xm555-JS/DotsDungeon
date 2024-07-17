@@ -20,7 +20,7 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sfxPlayers;
     int channellIndex;
 
-    public enum Sfx { BUY, CLICK, CONFIRM, DENIED, EQUIP, OPENWINDOW, ATTACK, DEAD, STEP, HEAL, FIRE, FIREBALL, ICE, POISION, Hit };
+    public enum Sfx { BUY, CLICK, CONFIRM, DENIED, EQUIP, OPENWINDOW, ATTACK, DEAD, STEP, HEAL, FIRE, FIREBALL, ICE, POISION, HIT };
 
     void Awake()
     {

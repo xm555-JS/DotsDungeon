@@ -157,7 +157,7 @@ public class cPlayer : MonoBehaviour
     void ApplyDamage(float damege)
     {
         // audio ÇÇ°Ý
-        AudioManager.instance.PlayerSfx(AudioManager.Sfx.Hit);
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.HIT);
 
         float defense = GameManager.instance.defen * 0.3f;
         float applyDamage = damege - (defense);

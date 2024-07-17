@@ -55,12 +55,14 @@ namespace Chapter.State
 
             Vector2 monsterDir = dir.normalized * speed * Time.deltaTime;
             rigid.MovePosition(rigid.position + monsterDir);
-
             StepAudio();
         }
 
         void StepAudio()
         {
+            if (speed < 0.5f)
+                return;
+
             stepTime += Time.deltaTime;
             if (stepTime >= 0.3f)
             {
