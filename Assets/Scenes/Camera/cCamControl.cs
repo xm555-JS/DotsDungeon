@@ -65,7 +65,7 @@ public class cCamControl : MonoBehaviour
 
     void CameraMoving(float posX, float posY)
     {
-        posX = Mathf.Clamp(posX, -5.7f, 5.7f);
+        posX = Mathf.Clamp(posX, -6.9f, 6.65f);
         posY = Mathf.Clamp(posY, -0.6f, 0f);
 
         this.transform.position = new Vector3(posX, posY, -10f);

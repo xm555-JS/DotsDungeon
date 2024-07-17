@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+        Application.targetFrameRate = 60;
+
         // 저장된 데이터 로드
         LoadData();
     }
@@ -47,9 +49,9 @@ public class GameManager : MonoBehaviour
         if (player == null)
             Debug.Log("player가 없습니다");
 
-        //// test_code
-        //if (Input.GetKeyDown(KeyCode.F))
-        //    money += 10000;
+        // test_code
+        if (Input.GetKeyDown(KeyCode.F))
+            money += 10000;
     }
 
     void LoadData()

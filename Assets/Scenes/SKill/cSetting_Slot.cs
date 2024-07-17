@@ -41,6 +41,8 @@ public class cSetting_Slot : MonoBehaviour
         slot_Image = this.GetComponent<Image>();
 
         Setting_Slot();
+
+        Destroy(selected_Skill.gameObject);
     }
 
     void Setting_Slot()
