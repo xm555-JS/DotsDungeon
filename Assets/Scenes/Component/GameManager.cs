@@ -32,6 +32,28 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
 
+        // 저장된 데이터 로드
+        LoadData();
+    }
+
+    void Update()
+    {
+        SceneSetting();
+        GameTime();
+        PotalOpen();
+        Maximum_Money();
+        GameReward();
+
+        if (player == null)
+            Debug.Log("player가 없습니다");
+
+        // test_code
+        if (Input.GetKeyDown(KeyCode.F))
+            money += 10000;
+    }
+
+    void LoadData()
+    {
         if (PlayerPrefs.HasKey("Key"))
         {
             // 저장된 데이터 Load
@@ -42,22 +64,6 @@ public class GameManager : MonoBehaviour
             hp = PlayerPrefs.GetFloat("hp");
             coolTime = PlayerPrefs.GetFloat("coolTime");
         }
-    }
-
-    void Update()
-    {
-        SceneSetting();
-        GameTime();
-        PotalOpen();
-        Maximum();
-        GameReward();
-
-        if (player == null)
-            Debug.Log("player가 없습니다");
-
-        // test_code
-        if (Input.GetKeyDown(KeyCode.F))
-            money += 10000;
     }
 
     void PotalOpen()
@@ -99,14 +105,12 @@ public class GameManager : MonoBehaviour
             // bgm
             AudioManager.instance.PlayBgm(AudioManager.Bgm.STAGE);
         }
-
-        if (scene.name == "Level_Boss")
+        else if (scene.name == "Level_Boss")
         {
             reward = Resources.Load<GameObject>("UI_Prefabs/Reward");
             reward = Instantiate(reward);
             GameObject parent = GameObject.Find("Canvas");
             reward.transform.SetParent(parent.transform);
-            //reward.transform.position = new Vector3(0f, 0f, 0f);
             RectTransform recttransfom = reward.GetComponent<RectTransform>();
             recttransfom.anchoredPosition = new Vector3(0f, 0f, 0f);
             isActive = true;
@@ -114,9 +118,7 @@ public class GameManager : MonoBehaviour
             // bgm
             AudioManager.instance.PlayBgm(AudioManager.Bgm.BOSS);
         }
-
-
-        if (scene.name == "Level_Lobby")
+        else if (scene.name == "Level_Lobby")
         {
             player.transform.position = new Vector3(-7.5f, -1f, player.transform.position.z);
             player.transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -130,7 +132,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Maximum()
+    void Maximum_Money()
     {
         if (money >= 1000000)
             money = 1000000;

@@ -13,6 +13,7 @@ namespace Chapter.State
         private Vector2 dir;
         private float speed = 1f;
         private bool isChase;
+        private float stepTime;
 
         public void SetSpeed(float _speed) { speed = _speed; }
 
@@ -54,8 +55,19 @@ namespace Chapter.State
 
             Vector2 monsterDir = dir.normalized * speed * Time.deltaTime;
             rigid.MovePosition(rigid.position + monsterDir);
+
+            StepAudio();
         }
 
+        void StepAudio()
+        {
+            stepTime += Time.deltaTime;
+            if (stepTime >= 0.3f)
+            {
+                AudioManager.instance.PlayerSfx(AudioManager.Sfx.STEP);
+                stepTime = 0;
+            }
+        }
 
         void Awake()
         {

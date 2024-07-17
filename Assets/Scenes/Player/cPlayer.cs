@@ -14,8 +14,6 @@ public class cPlayer : MonoBehaviour
     public Vector2 inputVec;
     public float speed;
 
-    public float magicPower;
-
     Rigidbody2D rigid;
     CapsuleCollider2D capCollider;
     Animator anim;
@@ -48,12 +46,7 @@ public class cPlayer : MonoBehaviour
 
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        capCollider = GetComponent<CapsuleCollider2D>();
-        anim = GetComponent<Animator>();
-        maxHp = 100f;
-        hp = maxHp;
-        magicPower = 15f;
+        PlayerInitialize();
     }
 
     void Start()
@@ -77,7 +70,7 @@ public class cPlayer : MonoBehaviour
         {
             // audio
             stepTime += Time.deltaTime;
-            if (stepTime >= 0.5f)
+            if (stepTime >= 0.3f)
             {
                 AudioManager.instance.PlayerSfx(AudioManager.Sfx.STEP);
                 stepTime = 0;
@@ -102,6 +95,15 @@ public class cPlayer : MonoBehaviour
 
         Vector2 moveVec = inputVec * speed * Time.deltaTime;
         rigid.MovePosition(rigid.position + moveVec);
+    }
+
+    void PlayerInitialize()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        capCollider = GetComponent<CapsuleCollider2D>();
+        anim = GetComponent<Animator>();
+        maxHp = 100f;
+        hp = maxHp;
     }
 
     void OnMove(InputValue value)

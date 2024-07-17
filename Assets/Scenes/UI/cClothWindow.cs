@@ -138,7 +138,5 @@ public class cClothWindow : MonoBehaviour
         preDefen = objData.defen;
         preHp = objData.hp;
         preCoolTime = objData.coolTime;
-
-
     }
 }

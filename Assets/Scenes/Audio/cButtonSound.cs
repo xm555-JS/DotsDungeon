@@ -8,4 +8,9 @@ public class cButtonSound : MonoBehaviour
     {
         AudioManager.instance.PlayerSfx(AudioManager.Sfx.CLICK);
     }
+
+    public void OpenWindow_Sound()
+    {
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.OPENWINDOW);
+    }
 }
