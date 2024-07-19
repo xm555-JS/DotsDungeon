@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3742120965206234733}
   - component: {fileID: -6924899844165081838}
   - component: {fileID: 228973006852132922}
-  - component: {fileID: -4414229037611892609}
+  - component: {fileID: -4616092563465131823}
   m_Layer: 0
   m_Name: Fire_Ball
   m_TagString: Skill
@@ -4889,7 +4889,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
---- !u!114 &-4414229037611892609
+--- !u!114 &-4616092563465131823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4898,7 +4898,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1127703606357471041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f342a320793e01643b7bca37802ba94e, type: 3}
+  m_Script: {fileID: 11500000, guid: d31c0657f5a8ca149ac6393bf68bee26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damege: 25
+  skillDamage: 0

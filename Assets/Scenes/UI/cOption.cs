@@ -8,7 +8,7 @@ public class cOption : MonoBehaviour
 
     public void Open_Option_Window()
     {
-        option_Window.transform.localScale = new Vector3(1f, 1f, 1f);
+        option_Window.transform.localScale = new Vector3(2f, 2f, 2f);
 
         // audio
         AudioManager.instance.PlayerSfx(AudioManager.Sfx.CONFIRM);

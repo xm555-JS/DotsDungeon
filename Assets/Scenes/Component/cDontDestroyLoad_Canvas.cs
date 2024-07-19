@@ -5,17 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class cDontDestroyLoad_Canvas : MonoBehaviour
 {
-    private static List<string> dontDestoryObjects = new List<string>();
+    private static List<string> dontDestroyObjects = new List<string>();
 
     void Awake()
     {
-        if (dontDestoryObjects.Contains(gameObject.name))
+        if (dontDestroyObjects.Contains(gameObject.name))
         {
             Destroy(gameObject);
             return;
         }
 
-        dontDestoryObjects.Add(gameObject.name);
+        dontDestroyObjects.Add(gameObject.name);
         DontDestroyOnLoad(gameObject);
     }
     private void Update()
@@ -24,9 +24,9 @@ public class cDontDestroyLoad_Canvas : MonoBehaviour
         if (scene.name == "Level_Lobby")
         {
             // Level_Lobby 씬에서는 자신을 파괴하지 않음
-            if (dontDestoryObjects.Contains(gameObject.name))
+            if (dontDestroyObjects.Contains(gameObject.name))
             {
-                dontDestoryObjects.Remove(gameObject.name);
+                dontDestroyObjects.Remove(gameObject.name);
             }
             Destroy(gameObject);
         }

@@ -163,6 +163,7 @@ public class cWindow_Skill : MonoBehaviour
         selected_Skill_Image.sprite = slot.GetComponent<Image>().sprite;
         obj.transform.SetParent(this.transform);
         obj.transform.localPosition = Vector3.zero;
+        obj.transform.localScale = Vector3.zero;
         Debug.Log("Ω∫≈≥ º±≈√µ ");
     }
 }

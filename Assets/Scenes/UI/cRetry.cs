@@ -14,6 +14,9 @@ public class cRetry : MonoBehaviour
 
     public void Home()
     {
+        GameObject transScene = GameObject.Find("TransScene");
+        transScene.GetComponent<FadeInOut>().SetStart(true);
+
         Time.timeScale = 1f;
         GameManager.instance.DeadScene.transform.localScale = new Vector3(0f, 0f, 0f);
         StartCoroutine("StartSceneLoad_Lobby");

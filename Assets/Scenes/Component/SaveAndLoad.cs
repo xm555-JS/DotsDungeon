@@ -86,6 +86,8 @@ public class SaveAndLoad : MonoBehaviour
 
                 Button itemButton = item.GetComponent<Button>();
                 itemButton.onClick.AddListener(cloth_Armor.GetComponent<cClothWindow>().SetButton);
+
+                item.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             }
             else if (itemToLoad[i].itemData.itmeType == "Helmet")
             {
@@ -93,6 +95,8 @@ public class SaveAndLoad : MonoBehaviour
 
                 Button itemButton = item.GetComponent<Button>();
                 itemButton.onClick.AddListener(cloth_Helmet.GetComponent<cClothWindow>().SetButton);
+
+                item.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             }
 
             // 버튼 이미지
@@ -147,8 +151,8 @@ public class SaveAndLoad : MonoBehaviour
                 cloth_Armor.SetActive(true);
                 cloth_Helmet.GetComponent<cClothWindow>().Initialize();
                 cloth_Armor.GetComponent<cClothWindow>().Initialize();
-                cloth_Helmet.SetActive(false);
-                cloth_Helmet.transform.parent.gameObject.SetActive(false);
+                cloth_Armor.SetActive(false);
+                cloth_Armor.transform.parent.gameObject.SetActive(false);
             }
         }
         else

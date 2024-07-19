@@ -9720,7 +9720,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2117696355404282726}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f342a320793e01643b7bca37802ba94e, type: 3}
+  m_Script: {fileID: 11500000, guid: d31c0657f5a8ca149ac6393bf68bee26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damege: 15
+  skillDamage: 0
