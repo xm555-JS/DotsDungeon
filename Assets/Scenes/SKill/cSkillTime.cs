@@ -13,13 +13,8 @@ public class cSkillTime : MonoBehaviour
         color = this.gameObject.GetComponent<Image>().color;
     }
 
-    public void CoolTimeSetting(float coolTime) // float coolTime
+    public void CoolTimeSetting(float coolTime)
     {
-        GameObject selected_Imaget = GameObject.Find("Selected_Skill(Clone)");
-        if (selected_Imaget)
-            return;
-
-        Debug.Log(coolTime + "스킬 쿨타임 적용됨");
         isPlaying = true;
         SetAlphaColor(0.8f);
         StartCoroutine(StartCoolTime(coolTime));
@@ -27,18 +22,21 @@ public class cSkillTime : MonoBehaviour
 
     IEnumerator StartCoolTime(float coolTime)
     {
+        // 쿨타임 이미지의 raycastTarget를 true로 만들어 스킬을 사용하지 못하게함.
         this.gameObject.GetComponent<Image>().raycastTarget = true;
 
-        float elapsedTime = 0f;
-        while (elapsedTime < coolTime)
+        // 쿨타임 이미지의 fillAmount 조절
+        float fillingTime = 0f;
+        while (fillingTime < coolTime)
         {
-            elapsedTime += Time.deltaTime;
+            fillingTime += Time.deltaTime;
 
-            float fillAmount = 1f - (elapsedTime / coolTime);
+            float fillAmount = 1f - (fillingTime / coolTime);
             this.gameObject.GetComponent<Image>().fillAmount = fillAmount;
             yield return null;
         }
 
+        // 원래 상태로 복구
         SetAlphaColor(0f);
         this.gameObject.GetComponent<Image>().fillAmount = 1f;
         this.gameObject.GetComponent<Image>().raycastTarget = false;

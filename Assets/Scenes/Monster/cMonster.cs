@@ -34,6 +34,7 @@ public class cMonster : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        // 몬스터가 쫒아가는 상태인지 체크
         chase = this.gameObject.GetComponentInChildren<cMonsterChase>().GetisChase();
         if (chase == false)
             return;
@@ -49,11 +50,13 @@ public class cMonster : MonoBehaviour
         Vector2 monsterDir = dir.normalized * speed * Time.deltaTime;
         rigid.MovePosition(rigid.position + monsterDir);
     }
+
     protected virtual void Attack(float distance)
     {
         Vector2 dir = new Vector2(-transform.localScale.x, 0).normalized;
         int layerMast = 1 << LayerMask.NameToLayer("Player");
 
+        // Raycast를 이용하여 플레이어 공격
         Debug.DrawRay(transform.position, new Vector2(-transform.localScale.x, 0) / 2f, Color.yellow);
         if (Physics2D.Raycast(transform.position, dir, distance, layerMast))
             anim.SetTrigger("isMonAttack");

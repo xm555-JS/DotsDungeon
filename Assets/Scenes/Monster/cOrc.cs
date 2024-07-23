@@ -8,12 +8,17 @@ public class cOrc : cMonster
 
     void Start()
     {
+        Initiallize();
+        attackCollider.SetActive(false);
+    }
+
+    void Initiallize()
+    {
+        // 몬스터 기본 Info
         speed = 2f;
         hp = 100f;
         maxHp = 100f;
         distance = 0.5f;
-
-        attackCollider.SetActive(false);
     }
 
     protected override void Update()

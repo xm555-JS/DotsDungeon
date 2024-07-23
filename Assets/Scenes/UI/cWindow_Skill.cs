@@ -44,6 +44,7 @@ public class cWindow_Skill : MonoBehaviour
 
         count++;
 
+        // 게임을 시작했을 때 첫 페이지에 스킬을 추가할 수 있게 List Add
         if (skillSprite.Count <= page)
             skillSprite.Add(new List<Sprite>());
         if (skillDesc.Count <= page)
@@ -51,6 +52,7 @@ public class cWindow_Skill : MonoBehaviour
 
         if (skillSprite[page] != null)
         {
+            // 습득한 스킬이 이미 가지고 있는 스킬이라면 return
             foreach (Sprite spt in skillSprite[page])
             {
                 if (skillData.skillSprite == spt)
@@ -61,6 +63,7 @@ public class cWindow_Skill : MonoBehaviour
             }
         }
 
+        // 스킬이 4개가 넘으면 다음 페이지에 스킬을 추가할 수 있게
         if (skillSprite[page].Count >= 4)
         {
             page++;
@@ -70,7 +73,6 @@ public class cWindow_Skill : MonoBehaviour
             if (skillDesc.Count <= page)
                 skillDesc.Add(new List<string>());
         }
-            
 
         skillSprite[page].Add(skillData.skillSprite);
         skillDesc[page].Add(skillData.skillDesc);

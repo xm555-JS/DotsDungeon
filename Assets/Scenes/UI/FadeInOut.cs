@@ -7,6 +7,7 @@ public class FadeInOut : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
     float fadeTime = 0.5f;
+    WaitForSeconds fadeInTime = new WaitForSeconds(0.3f);
     bool isStart = false;
 
     public void SetStart(bool _isStart) { isStart = _isStart; }
@@ -49,7 +50,7 @@ public class FadeInOut : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return fadeInTime;
         float time = 0f;
         while (time < fadeTime)
         {

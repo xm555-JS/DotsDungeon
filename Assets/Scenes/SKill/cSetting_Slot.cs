@@ -32,7 +32,10 @@ public class cSetting_Slot : MonoBehaviour
 
         GameObject selected_Skill = GameObject.Find("Selected_Skill(Clone)");
         if (selected_Skill == null)
+        {
+            Debug.Log("cSetting_Slot - selected_Skill가 없습니다.");
             return;
+        }
 
         if (SlotCheck())
             return;
@@ -153,14 +156,7 @@ public class cSetting_Slot : MonoBehaviour
             image = slot_Image;
         }
 
-        //if (image.sprite.name == "Fire_Shoot")
         btn.onClick.RemoveAllListeners();
-        //else if (image.sprite.name == "Ice_Shoot")
-        //    btn.onClick.RemoveAllListeners();
-        //else if (image.sprite.name == "Heal")
-        //    btn.onClick.RemoveAllListeners();
-        //else if (image.sprite.name == "Poision_Shoot")
-        //    btn.onClick.RemoveAllListeners();
     }
 
     float SetCoolTime(Image skillImage)

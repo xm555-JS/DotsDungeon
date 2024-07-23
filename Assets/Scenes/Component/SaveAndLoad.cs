@@ -19,26 +19,6 @@ public class SaveAndLoad : MonoBehaviour
         {
             itemData = _itemData;
         }
-
-        public class DataLoad
-        {
-            public GameObject preObj; // 게임오브젝트는 안된대용;; 이것도 고쳐야해용
-            public float preStr;
-            public float preSpell;
-            public float preDefen;
-            public float preHp;
-            public float preCoolTime;
-
-            public DataLoad(GameObject _obj, float _preStr, float _preSpell, float _preDefen, float _preHp, float _preCoolTime)
-            {
-                preObj = _obj;
-                preStr = _preStr;
-                preSpell = _preSpell;
-                preDefen = _preDefen;
-                preHp = _preHp;
-                preCoolTime = _preCoolTime;
-            }
-        }
     }
 
     List<ItemLoad> itemsToLoad = new List<ItemLoad>();
@@ -47,11 +27,13 @@ public class SaveAndLoad : MonoBehaviour
     {
         foreach (cItemData data in cloth_Helmet.GetComponent<cClothWindow>().saveItemData_Helmet)
         {
+            // 구입했던 Helmet List에 추가
             ItemLoad saveItem = new ItemLoad(data);
             itemsToLoad.Add(saveItem);
         }
         foreach (cItemData data in cloth_Armor.GetComponent<cClothWindow>().saveItemData_Armor)
         {
+            // 구입했던 Armor List에 추가
             ItemLoad saveItem = new ItemLoad(data);
             itemsToLoad.Add(saveItem);
         }
@@ -60,7 +42,7 @@ public class SaveAndLoad : MonoBehaviour
 
         File.WriteAllText(Application.persistentDataPath + transform.name, json);
 
-        // 착용중인 아이템 저장
+        // 착용중인 아이템 스탯 저장
         Using_ItemData_Save();
 
         Debug.Log("Saving...");
@@ -71,9 +53,7 @@ public class SaveAndLoad : MonoBehaviour
         Debug.Log("Loading...");
         List<ItemLoad> itemToLoad = CustomJSON.FromJson<ItemLoad>(File.ReadAllText(Application.persistentDataPath + transform.name));
 
-        Debug.Log(itemToLoad.Count);
-
-        // 들어오는거 확인했으니까 save된 itemdata로 각각 부모, 이미지, 설명, 이름 등등 필요한거 채워서 만들면 어떻게든 될거 같은데...
+        // save된 itemdata를 기반으로 구입했던 아이템을 다시 생성
         for (int i = 0; i < itemToLoad.Count; i++)
         {
             // purchase item prepab을 복제한다.

@@ -11,6 +11,7 @@ public class cCamControl : MonoBehaviour
 
     private float posX;
     private float posY;
+    static float defaultPosZ = -10f;
 
     private float duration = 3f;
     private float time = 0f;
@@ -25,8 +26,12 @@ public class cCamControl : MonoBehaviour
     void TargetCamera()
     {
         if (!target)
+        {
+            Debug.Log("cCamControl - target이 없습니다.");
             return;
+        }
 
+        // 이전 타겟과 현재 타겟이 다르면 엑션 카메라 실행
         if (preTarget != target)
             ActionCamera();
         else
@@ -40,13 +45,14 @@ public class cCamControl : MonoBehaviour
 
     void ActionCamera()
     {
-        // 게임이 시작될 때 target이 null -> player이 되면서 생기는 카메라 움직임 제한.
+        // 타겟이 없을 땐 기본적으로 플레이어 카메라로 설정
         if (!preTarget)
         {
             FocusOnPlayer();
             return;
         }
 
+        // duration만큼 target을 향해 카메라 이동
         if (time <= duration)
         {
             float posX = Mathf.Lerp(preTarget.transform.position.x, target.transform.position.x, time / duration);
@@ -68,7 +74,7 @@ public class cCamControl : MonoBehaviour
         posX = Mathf.Clamp(posX, -6.9f, 6.65f);
         posY = Mathf.Clamp(posY, -0.6f, 0f);
 
-        this.transform.position = new Vector3(posX, posY, -10f);
+        this.transform.position = new Vector3(posX, posY, defaultPosZ);
     }
 
     public void TargetSetting(GameObject changeTarget)
